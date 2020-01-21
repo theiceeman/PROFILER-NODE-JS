@@ -1,0 +1,223 @@
+<header id="wt-header" class="wt-header wt-haslayout">
+            <div class="wt-navigationarea">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong class="wt-logo">
+                                <a href="/">
+                                    <img src="/images/profiler-logo-writeup.png" alt="company logo here">
+                                </a>
+                            </strong>
+                            <div class="wt-rightarea">
+                                <nav id="wt-nav" class="wt-nav navbar-expand-lg">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <i class="lnr lnr-menu"></i>
+                                    </button>
+                                    <div class="collapse navbar-collapse profiler-navigation" id="navbarNav">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <a href="register-page">Become a Seller</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="how-it-works-page">How It Works</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="about-us-page">About Us</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                                <div class="wt-loginarea">
+                                    <% if(userId){ %>
+                                    <a href="/user">
+                                            <figure class="wt-userimg" tooltip="My Dashboard">
+                                                    <img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
+                                                </figure>
+                                    </a>
+                                    <div class="wt-loginoption ">
+                                        <div class="ct-online"></div>
+                                        <a href="/user" id="" class="wt-loginbtn"><%= user[0].firstName %></a>
+                                    <% }else{ %>
+                                        
+                                    <figure class="wt-userimg">
+                                            <img src="/images/avatar.jpg" alt="img description">
+                                        </figure>
+                                        <div class="wt-loginoption">
+                                            <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn">Login</a>
+                                    <% } %>
+                                        <div class="wt-loginformhold">
+                                            
+                                            <div class="wt-loginheader">
+                                                <span>Login</span>
+                                                <a href="javascript:;"><i class="fa fa-times"></i></a>
+                                            </div>
+                                            
+                                            <form class="wt-formtheme wt-loginform do-login-form"id="login-form">
+                                                <fieldset>
+                                                    <div class="form-group text-center text-danger">
+                                                         <p id="alrt">&nbsp;</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="email" class="form-control" placeholder="Email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" name="password" class="form-control" placeholder="Password">
+                                                    </div>
+                                                    <div class="wt-logininfo">
+                                                        <button class="wt-btn do-login-button log-in">Login</button>
+                                                        <span class="wt-checkbox">
+																<input id="wt-login" type="checkbox" name="rememberme">
+																<label for="wt-login">Keep me logged in</label>
+															</span>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="wt-loginfooterinfo">
+                                                    <a href="javascript:;" class="wt-forgot-password">Forgot password?</a>
+                                                    <a href="register-page">Create account</a>
+                                                </div>
+                                            </form>
+                                            <form class="wt-formtheme wt-loginform do-forgot-password-form wt-hide-form">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <input type="email" name="email" class="form-control get_password" placeholder="Email">
+                                                    </div>
+
+                                                    <div class="wt-logininfo">
+                                                        <a href="javascript:;" class="wt-btn do-get-password">Get Pasword</a>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="wt-loginfooterinfo">
+                                                    <a href="javascript:void(0);" class="wt-show-login">Login</a>
+                                                    <a href="register.html">Create account</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <a href="register-page" class="wt-btn">Join Now</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                            <div class="wt-leftarea">
+                                <nav id="wt-nav" class="wt-nav navbar-expand-lg">
+                                    <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
+                                        <ul class="navbar-nav">
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Artisans</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="category-profile-page">Plumbers</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">Brick Layers</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Programming & Tech</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="category-profile-page">Web Development</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="category-profile-page">Mobile Development</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">Wordpress</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">Game Development</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">Desktop App</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">I.T Consultant</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="category-profile-page">UX / UI</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Fashion</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="#">Tailors</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Make Ups</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Spar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Hair Dressers</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Digital Marketing</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="#">SEO</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Bloggers</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Social Media Marketing</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Email Media Marketing</a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Graphic Design</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="#">Logo Design</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Portraits & Caricatures</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Architecture</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Interior & Exterior Design</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children page_item_has_children">
+                                                <a href="javascript:void(0);">Lifestyle</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="#">DJs</a>
+                                                    </li>
+                                                    <li class="current-menu-item">
+                                                        <a href="#">Life Bands</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Music Promoters</a>
+                                                    </li><li>
+                                                        <a href="#">Musicians</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Music Producers</a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>

@@ -1,0 +1,481 @@
+<script src="/js/vendor/jquery-3.3.1.js"></script>
+<script src="/js/vendor/jquery-library.js"></script>
+<script src="/js/vendor/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.hoverdir.js"></script>
+<script src="/js/jquery.sortable.js"></script>
+<script src="/js/chosen.jquery.js"></script>
+<script src="/js/tilt.jquery.js"></script>
+<script src="/js/scrollbar.min.js"></script>
+<script src="/js/countdown.min.js"></script>
+<script src="/js/prettyPhoto.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/readmore.js"></script>
+<script src="/js/countTo.js"></script>
+<script src="/js/appear.js"></script>
+<script src="/js/tipso.js"></script>
+<script src="/js/gmap3.js"></script>
+<script src="js/chart.js"></script>
+<script src="/js/jRate.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript" src="/the-sweetalert-js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/the-sweetalert-js/sweetalert.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(document).ready(function () {
+
+// For Socket.io    ->
+
+
+let socket = io();
+
+$('div#notifyBox').click(function (e) { 
+    e.preventDefault();
+    let notificationId = $.trim( $(this).find(".notifyId").text() );
+    // console.log(notificationId)
+    socket.emit('notification', notificationId);
+});
+
+socket.on('notification-detail',( rows) => {
+    // console.log(rows);
+    let wtChatarea = document.createElement('div');
+    wtChatarea.classList.add('wt-chatarea', 'wt-chatarea-empty');
+    let ctViewNotify =document.createElement('div');
+    ctViewNotify.setAttribute('class','ct-viewNotify');
+    wtChatarea.appendChild(ctViewNotify);
+    let h3 = document.createElement('h3');
+    let notifyTitle = document.createTextNode(rows[0].title);
+    h3.appendChild(notifyTitle)
+    ctViewNotify.appendChild(h3)
+    let h6 = document.createElement('h6');
+    let notifyDate = document.createTextNode('Sent at '+rows[0].dateSent);
+    h6.appendChild(notifyDate)
+    ctViewNotify.appendChild(h6)
+    let firstP = document.createElement('p');
+    firstP.setAttribute('class', 'ct-body');
+    let firstPBody = document.createTextNode(rows[0].message);
+    firstP.appendChild(firstPBody);
+    ctViewNotify.appendChild(firstP);
+    let ctFootNotify = document.createElement('p');
+    ctFootNotify.setAttribute('class', 'ct-foot-notify');
+    ctViewNotify.appendChild(ctFootNotify);
+    let ctDiv = document.createElement('div');
+    ctDiv.setAttribute('style', 'float:left;width:100%;');
+    let cthr = document.createElement('hr');
+    cthr.setAttribute('style', 'margin-top: 7rem;');
+    ctDiv.appendChild(cthr);
+    wtChatarea.appendChild(ctDiv);
+    let ctNotifyFooter = document.createElement('div');
+    ctNotifyFooter.setAttribute('class', 'ct-notify-footer');
+    wtChatarea.appendChild(ctNotifyFooter);
+    let myNode = document.getElementById('wt-liForChatarea');
+    while (myNode.firstChild) {
+        myNode.firstChild.remove();
+    }
+    myNode.appendChild(wtChatarea);
+    $("p.ct-foot-notify").append('Thanks,<br>Research Team at Profiler');
+    $("div.ct-notify-footer").append('<p>Made by  <a href="https://web.facebook.com/ebube.okorie.94?ref=bookmarks"> Kelvin </a> </p>');
+    // console.log(wtChatarea);
+})
+
+// For Socket.io    ->
+
+
+
+
+
+
+
+
+
+
+
+// for file upload response -->
+    let error = $('#file-upload-error').val();
+    // console.log(error)
+    if(error !== '' && error !== null && error !== undefined){
+        if(error === 'File Uploaded'){
+            swal('Congratulations',error,'success');
+                     setTimeout(redirectPage,1000);
+        }else{
+            swal('Sorry',error,'error');
+        }
+        
+    }
+
+// for file upload response <--
+        
+
+// for creating new Gig
+
+
+
+$('#ct-gig-maincategory').change(function (e) { 
+        // console.log('heyy'); 
+                e.preventDefault();
+                $('#ct-gig-subcategory > *').remove('#rem');
+                var category_id = $(this).val();
+                var fdata = ({
+                    'gigMainCategory':category_id,
+                });
+                // console.log(fdata);
+
+                $.ajax({
+                    type: "post",
+                    url: "/gig-get-subCategory",
+                    data: fdata,
+                    dataType: "json",
+                    success: function (response) { 
+                        // console.log(response);
+                            for(var i = 0; i < response.length; i++) {
+                                var inArray = response[i];
+                                for(var j = 0; j < inArray.length; j++) {
+                                   if(j==0){
+                                       var cval = response[i][j];
+                                   }else{
+                                    $('#ct-gig-subcategory').append('<option id="rem" value="'+response[i][j]+'">'+cval+'</option>');
+                                   }
+                                }
+                            }
+                    }
+                });
+            });
+
+            $('.create-new-gig').click(function (e) { 
+                e.preventDefault();
+                let title = $('#create-new-gig-title').val();
+                let category = $('#ct-gig-maincategory').val();
+                let sub_cat = $('#ct-gig-subcategory').val();
+                let data = {
+                    "gig_title": title,
+                    "main_category": category,
+                    "sub_category": sub_cat,
+                }
+                
+                console.log(data);
+                
+
+                $.ajax({
+                    type: "post",
+                    url: "/create-new-gig",
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response); 
+                        if(response[0].message !== 'Gig created successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Gig created successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(refpage,1000);  
+                        }
+
+
+                    }
+                });
+
+            });
+
+
+
+// for creating new Gig <--
+    
+    $('.register').click(function (e) { 
+        e.preventDefault();
+        let data = $('#reg-form').serializeArray();
+        console.log(data);
+
+        $.ajax({
+            type: "post",
+            url: "register-page",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+               /*  let res = $.parseJSON(response);
+                console.log(res); */
+                if(response[0].message !== 'Proceed To Login'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Proceed To Login'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }
+
+
+            }
+        });
+
+    });
+    $('.log-in').click(function (e) { 
+        e.preventDefault();
+        let data = $('#login-form').serializeArray();
+        console.log(data);
+
+
+        $.ajax({
+            type: "post",
+            url: "login",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+
+
+                 if(response.message !== 'login'){
+                     let textnode = document.createTextNode(response.message);
+                     let selectedElement = document.querySelector('#alrt').childNodes[0];
+                     //console.log(selectedElement);
+                     let parent = selectedElement.parentNode;
+                     parent.replaceChild(textnode,selectedElement);
+                     
+                    
+                }else if(response.message == 'login'){
+                    window.location.href = '/user';
+                }
+
+
+            }
+        });
+
+    });
+
+    $('.ct-personal-details').click(function (e) { 
+        e.preventDefault();
+        let userDetailsForm = $('#personal-details :input').serializeArray();
+        //console.log(userDetailsForm); return
+        let details = {
+            "firstname": userDetailsForm[0].value,
+            "lastname": userDetailsForm[1].value,
+            "sex": userDetailsForm[2].value,
+            "state": userDetailsForm[3].value,
+            "email": userDetailsForm[4].value,
+            "address": userDetailsForm[5].value,
+            "number": userDetailsForm[6].value,
+        }
+        console.log(details)
+        $.ajax({
+            type: "post",
+            url: "/update-personal-details",
+            data: details,
+            dataType: "json",
+            success: function (response) {
+                 console.log(response[0].message); 
+                if(response[0].message === 'No changes to personal details'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Personal Details Updated!'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }else{
+                    swal('Sorry','Server Error, Contact your administrator!'[0].message,'error');
+                }
+            }
+        });
+
+        
+        
+    });
+    $('.submit-desc-services').click(function (e) { 
+        e.preventDefault();
+        // NB: DESCRIPTION SHOULD HAVE A TEXT LIMIT
+        let userDescription = $('#desc-services :input').serializeArray();
+        let details = {
+            userDescription: userDescription[0].value,
+        } 
+        
+        
+
+        let skills = '';
+        // $('input:checkbox[ct=services]').each(function(){
+            for(let i = 0; i<=6; i++ ){
+                let check = $('input:checkbox[ct=services'+i+']').is(':checked');
+                if(check == true){
+                            var em = $('input:checkbox[ct=services'+i+']').attr('value');
+                            // console.log(em)
+                            skills += em+',';
+                }
+            }
+        // })
+
+
+
+        details.skills = skills;
+
+
+
+        console.log(details); 
+        $.ajax({
+            type: "post",
+            url: "/update-description-services",
+            data: details,
+            dataType: "json",
+            success: function (response) {
+                 console.log(response[0].message); 
+                if(response[0].message !== 'Description & Skills Updated!'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Description & Skills Updated!'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }else{
+                    swal('Sorry','Server Error, Contact your administrator!'[0].message,'error');
+                }
+            }
+        });
+
+        
+    });
+
+    
+
+    $('.project-one').click(function (e) { 
+        e.preventDefault();
+        let project = $('#project-one :input').serializeArray();
+        let email = $('#ct-em').val();
+        let details = {
+            title: project[0].value,
+            url: project[1].value,
+            email:email,
+        } 
+        console.log(details); 
+        $.ajax({
+            type: "post",
+            url: "/update-projects",
+            data: details,
+            dataType: "json",
+            success: function (response) {
+                 console.log(response[0].message); 
+                if(response[0].message !== 'Project registered successfully!'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Project registered successfully!'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }else{
+                    swal('Sorry','Server Error, Contact your administrator!','error');
+                }
+            }
+        });
+    });
+
+    $('.project-two').click(function (e) { 
+        e.preventDefault();
+        let project = $('#project-two :input').serializeArray();
+        let email = $('#ct-em').val();
+        let details = {
+            title: project[0].value,
+            url: project[1].value,
+            email:email,
+        } 
+        console.log(details); 
+        $.ajax({
+            type: "post",
+            url: "/update-projects",
+            data: details,
+            dataType: "json",
+            success: function (response) {
+                 console.log(response[0].message); 
+                if(response[0].message !== 'Project registered successfully!'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Project registered successfully!'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }else{
+                    swal('Sorry','Server Error, Contact your administrator!','error');
+                }
+            }
+        });
+    });
+    $('.project-two').click(function (e) { 
+        e.preventDefault();
+        let project = $('#project-two :input').serializeArray();
+        let email = $('#ct-em').val();
+        let details = {
+            title: project[0].value,
+            url: project[1].value,
+            email:email,
+        } 
+        console.log(details); 
+        $.ajax({
+            type: "post",
+            url: "/update-projects",
+            data: details,
+            dataType: "json",
+            success: function (response) {
+                 console.log(response[0].message); 
+                if(response[0].message !== 'Project registered successfully!'){
+                    swal('Sorry',response[0].message,'error');
+                }else if(response[0].message == 'Project registered successfully!'){
+                    swal('Congratulations',response[0].message,'success');
+                    setTimeout(refpage,1000);  
+                }else{
+                    swal('Sorry','Server Error, Contact your administrator!','error');
+                }
+            }
+        });
+    });
+    // profile-upload
+    $('.profile-upload').click(function (e) { 
+        e.preventDefault();
+        let project = document.getElementById('filep');
+        // console.log(project.files[0].size); return;  
+        // console.log(project.files);
+        if( project.files[0].size > 0 ){
+            if (project.files[0].size < 1000000) {
+                    if (project.files[0].type == 'image/png' || project.files[0].type == 'image/jpeg' ) {
+                        let ini = ['REM54','REN45','REO43','REP78','REQ67','RER43','RES45','RET34','REU34','REV65','REW56','REX56','REY78','REZ43','RDA65','RDB67','RDC34','RDD23','RDE87',"RAA87","RBH54","RHJ65","RKK45","RWH43","RBB45","RFC67","RGC54","RHC90","RJC43","RKC67","TLC34","TZC54","TXC34","TCC34","TVC67","TAG54","TAH34","TAS54","TAR45","TAC78","TAT67","TAZ34","TSY54","TSB54","TZX78","TQO65",];
+
+                        let rand = ini[Math.floor(Math.random() * ini.length)];
+
+                        rand += Math.floor(Math.random() * (10000000 - 1000000)) + 1000000;
+                        
+                        let file = {
+                        file: project.files[0].name,
+                        newName: rand,
+                        } 
+                        console.log(project.files); 
+                        console.log(file); 
+                        $.ajax({
+                            type: "post",
+                            url: "/upload-profile-image",
+                            data: file,
+                            dataType: "json",
+                            success: function (response) {
+                                console.log(response[0].message); return;
+                                if(response[0].message !== 'Project registered successfully!'){
+                                    swal('Sorry',response[0].message,'error');
+                                }else if(response[0].message == 'Project registered successfully!'){
+                                    swal('Congratulations',response[0].message,'success');
+                                    setTimeout(refpage,1000);  
+                                }else{
+                                    swal('Sorry','Server Error, Contact your administrator!','error');
+                                }
+                            }
+                        });
+                    } else {
+                        swal('Sorry','Please select a valid file type!','error');
+                    }
+            } else {
+                swal('Sorry','File size too big!','error');
+            }
+        }else{
+            swal('Sorry','Select file with valid file size!','error');
+        }
+
+        
+        
+    });
+
+
+
+
+
+
+});
+function redirectPage(){
+    window.location.href = "http://localhost:3000/my-profile";
+}
+function refpage(){
+		window.location.reload();
+	    }
+
+
+</script>
+</body>
+</html>

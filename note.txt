@@ -1,0 +1,66 @@
+REFERENCES: https://www.sitepoint.com/using-node-mysql-javascript-client/
+
+https://stackoverflow.com/questions/30545749/how-to-provide-a-mysql-database-connection-in-single-file-in-nodejs
+
+
+mysql_query.query('SELECT * from your_table where ?', {id: '1'}, function(err, rows)   {
+    if(err) throw err;
+
+  console.log('Data received from Db:\n');
+  console.log(rows);
+});
+
+//FOR LOOPING THROUGH ROW RETURNED
+Data returned from the MySQL database can be parsed by simply lopping over the rows object.
+
+rows.forEach( (row) => {
+  console.log(`${row.name} is in ${row.location}`);
+});
+
+
+// FOR INSERT
+const employee = { name: 'Winnie', location: 'Australia' };
+con.query('INSERT INTO employees SET ?', employee, (err, res) => {
+  if(err) throw err;
+
+  console.log('Last insert ID:', res.insertId);
+});
+
+//UPDATING
+Similarly, when executing an update query, the number of rows affected can be retrieved using result.affectedRows:
+
+con.query(
+  'UPDATE employees SET location = ? Where ID = ?',
+  ['South Africa', 5],
+  (err, result) => {
+    if (err) throw err;
+
+    console.log(`Changed ${result.changedRows} row(s)`);
+  }
+);
+
+
+//DELETE
+con.query(
+  'DELETE FROM employees WHERE id = ?', [5], (err, result) => {
+    if (err) throw err;
+
+    console.log(`Deleted ${result.affectedRows} row(s)`);
+  }
+);
+
+
+mysql_query.query('SELECT * from your_table where ?', {id: '1'}, function(err, rows)   {
+    console.log(rows);
+});
+
+var sql = "UPDATE trn_employee set first_name =? , last_name =?  WHERE employee_id = ?";
+ 
+var query = connection.query(sql, ["Vinayak", "Patil", 1], function(err, result) {
+    console.log("Record Updated!!");
+    console.log(result);
+});
+ 
+connection.end();
+
+Multer: this is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files
