@@ -8,75 +8,76 @@
                 <!--Header End-->
                 <!--Main Start-->
                 <main id="wt-main" class="wt-main wt-haslayout custom-main">
-                    <!--Sidebar Start-->
-                    <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
-                            <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
-                                <span class="menu-icon">
-                                    <em></em>
-                                    <em></em>
-                                    <em></em>
-                                </span>
-                            </div>
-                            <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
-                                <div class="wt-companysdetails wt-usersidebar">
-                                    <figure class="wt-companysimg">
-                                        <img src="/images/sidebar/img-01.jpg" alt="img description">
-                                    </figure>
-                                    <div class="wt-companysinfo">
-                                            <figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
-                                        <div class="wt-title">
-                                            <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
-                                            <span>Amento Tech</span>
-                                        </div>
-                                        <!-- <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div> -->
-                                    </div>
+                    
+                        <!--Sidebar Start-->
+                        <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+                                <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+                                    <span class="menu-icon">
+                                        <em></em>
+                                        <em></em>
+                                        <em></em>
+                                    </span>
                                 </div>
-                                <nav id="wt-navdashboard" class="wt-navdashboard">
-                                    <ul>
-                                        <li class="wt-active">
-                                                <a href="/my-profile">
-                                                    <i class="ti-briefcase"></i>
-                                                    <span>View Profile</span>
+                                <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
+                                    <div class="wt-companysdetails wt-usersidebar">
+                                        <figure class="wt-companysimg">
+                                            <img src="/default/images/sidebar/img-01.jpg" alt="img description">
+                                        </figure>
+                                        <div class="wt-companysinfo">
+                                                <figure><img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+                                            <div class="wt-title">
+                                                <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
+                                                <span>Amento Tech</span>
+                                            </div>
+                                            <!-- <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div> -->
+                                        </div>
+                                    </div>
+                                    <nav id="wt-navdashboard" class="wt-navdashboard">
+                                        <ul>
+                                            <li class="wt-active">
+                                                    <a href="/my-profile">
+                                                        <i class="ti-briefcase"></i>
+                                                        <span>View Profile</span>
+                                                    </a>
+                                                </li>
+                                            <li class="wt-active">
+                                                <a href="/Mynotifications">
+                                                    <i class="ti-dashboard"></i>
+                                                    <span>My Notifications</span>
                                                 </a>
                                             </li>
-                                        <li class="wt-active">
-                                            <a href="/Mynotifications">
-                                                <i class="ti-dashboard"></i>
-                                                <span>My Notifications</span>
-                                            </a>
-                                        </li>
-                                        <li class="wt-active">
-                                            <a href="/user">
-                                                <i class="ti-package"></i>
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
-                                        <li class="wt-notificationicon menu-item-has-children">
-                                            <a href="javascript:void(0);">
-                                                <i class="ti-pencil-alt"></i>
-                                                <span>Gigs</span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li><hr><a href="/createGig">Create Gigs</a></li>
-                                                <li><hr><a href="/View-Gigs">Progress On Gigs</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="wt-active">
-                                            <a href="dashboard-profile.html">
-                                                <i class="ti-layers"></i>
-                                                <span>Help & Support</span>
-                                            </a>
-                                        </li>
-                                        <li class="wt-active">
-                                            <a href="dashboard-profile.html">
-                                                <i class="ti-key"></i>
-                                                <span>Logout</span>
-                                            </a>
-                                    </ul>
-                                </nav>
+                                            <li class="wt-active">
+                                                <a href="/user">
+                                                    <i class="ti-package"></i>
+                                                    <span>Dashboard</span>
+                                                </a>
+                                            </li>
+                                            <li class="wt-notificationicon menu-item-has-children">
+                                                <a href="javascript:void(0);">
+                                                    <i class="ti-pencil-alt"></i>
+                                                    <span>Gigs</span>
+                                                </a>
+                                                <ul class="sub-menu">
+                                                    <li><hr><a href="/createGig">Create Gigs</a></li>
+                                                    <li><hr><a href="/View-Gigs">Progress On Gigs</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="wt-active">
+                                                <a href="/user_support">
+                                                    <i class="ti-layers"></i>
+                                                    <span>Help & Support</span>
+                                                </a>
+                                            </li>
+                                            <li class="wt-active">
+                                                <a href="/logout">
+                                                    <i class="ti-key"></i>
+                                                    <span>Logout</span>
+                                                </a>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
-                        </div>
-                    <!--Sidebar Start-->
+                        <!--Sidebar Start-->
                     <!--Register Form Start-->
                     <section style="margin-top:-80px;" class="wt-haslayout">
                         <div class="row">
@@ -86,6 +87,7 @@
                                     <div class="wt-dashboardboxtitle">
                                         <h2>All Notifications</h2>
                                     </div>
+                                    <p style="display:none" class="user-detail"><%=user[0].email%></p>
                                     <!-- <div class="wt-dashboardboxtitle wt-titlemessages">
                                         <a href="javascript:void(0);" class="wt-back"><i class="ti-arrow-left"></i></a>
                                         <div class="wt-userlogedin">
@@ -99,7 +101,7 @@
                                         </div>
                                         <a href="javascript:void(0);" class="wt-viewprofile">View Profile</a>
                                     </div> -->
-                                    <div class="wt-dashboardboxcontent wt-dashboardholder wt-offersmessages">
+                                    <div  class="wt-dashboardboxcontent wt-dashboardholder wt-offersmessages">
                                         <ul class="wt-dashboardLi">
                                             <li>
                                                 <form class="wt-formtheme wt-formsearch">
@@ -110,10 +112,13 @@
                                                         </div>
                                                     </fieldset>
                                                 </form>
-                                                <div class="wt-verticalscrollbar wt-dashboardscrollbar">
+                                                <div style="overflow-y: auto !important;overflow"class="wt-verticalscrollbar wt-dashboardscrollbar">
                                                     <% for(var i=0; notifications[i]; i++){ %>
-                                                    <% if(notifications){ %>
+                                                    <% if(notifications[i]){ %>
                                                         <div id="notifyBox" class="wt-ad wt-dotnotification">
+                                                            <!-- <% if(notifications){ %> -->
+                                                            <div class="ct-read-notif"></div>
+                                                            <!-- <%} %> -->
                                                             <div class="wt-adcontent">
                                                                 <span class="notifyId">
                                                                     <%=notifications[i].uniqueId%>
@@ -125,48 +130,12 @@
                                                         
                                                     <%} %>
                                                     <% }%>
-                                                    <!-- <div class="wt-ad wt-dotnotification">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Reta Milnes </h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-ad">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Nichelle Yelvington</h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-ad wt-dotnotification">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Reta Milnes </h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-ad">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Nichelle Yelvington</h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-ad wt-dotnotification">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Reta Milnes </h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-ad">
-                                                        <div class="wt-adcontent">
-                                                            <h3>Nichelle Yelvington</h3>
-                                                            <span>Consectetur adipisicing elit sed do...</span>
-                                                        </div>
-                                                    </div> -->
                                                 </div>
                                             </li>
                                             <li id="wt-liForChatarea">
-                                                    <div style="padding: 199px 0;" class="wt-chatarea wt-chatarea-empty">
+                                                    <div style="padding: 199px 0px;" class="wt-chatarea wt-chatarea-empty">
                                                             <figure class="wt-chatemptyimg">
-                                                                <img src="images/message-img.png" alt="img description">
+                                                                <img src="/default/images/message-img.png" alt="img description">
                                                                 <figcaption><h3>No message selected to display</h3></figcaption>
                                                             </figure>
                                                         </div>
@@ -204,7 +173,7 @@
                                 <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
                                     <div class="tg-authorcodescan wt-codescanholder">
                                         <figure class="tg-qrcodeimg">
-                                            <img src="/images/qrcode.png" alt="img description">
+                                            <img src="/default/images/qrcode.png" alt="img description">
                                         </figure>
                                         <div class="tg-qrcodedetail">
                                             <span class="lnr lnr-laptop-phone"></span>
@@ -223,7 +192,7 @@
                                         </div>
                                     </div>
                                     <div class="wt-companyad">
-                                        <figure class="wt-companyadimg"><img src="/images/add-img.jpg" alt="img description"></figure>
+                                        <figure class="wt-companyadimg"><img src="/default/images/add-img.jpg" alt="img description"></figure>
                                         <span>Advertisement  255px X 255px</span>
                                     </div>
                                 </div>

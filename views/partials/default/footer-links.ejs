@@ -1,28 +1,52 @@
-<script src="/js/vendor/jquery-3.3.1.js"></script>
-<script src="/js/vendor/jquery-library.js"></script>
-<script src="/js/vendor/bootstrap.min.js"></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/jquery.hoverdir.js"></script>
-<script src="/js/jquery.sortable.js"></script>
-<script src="/js/chosen.jquery.js"></script>
-<script src="/js/tilt.jquery.js"></script>
-<script src="/js/scrollbar.min.js"></script>
-<script src="/js/countdown.min.js"></script>
-<script src="/js/prettyPhoto.js"></script>
-<script src="/js/jquery-ui.js"></script>
-<script src="/js/readmore.js"></script>
-<script src="/js/countTo.js"></script>
-<script src="/js/appear.js"></script>
-<script src="/js/tipso.js"></script>
-<script src="/js/gmap3.js"></script>
-<script src="js/chart.js"></script>
-<script src="/js/jRate.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript" src="/the-sweetalert-js/sweetalert.min.js"></script>
-<script type="text/javascript" src="/the-sweetalert-js/sweetalert.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+<script src="/default/js/vendor/jquery-3.3.1.js"></script>
+<script src="/default/js/vendor/jquery-library.js"></script>
+<script src="/default/js/vendor/bootstrap.min.js"></script>
+<script src="/default/js/owl.carousel.min.js"></script>
+<script src="/default/js/jquery.hoverdir.js"></script>
+<script src="/default/js/jquery.sortable.js"></script>
+<script src="/default/js/chosen.jquery.js"></script>
+<script src="/default/js/tilt.jquery.js"></script>
+<script src="/default/js/scrollbar.min.js"></script>
+<script src="/default/js/countdown.min.js"></script>
+<script src="/default/js/prettyPhoto.js"></script>
+<script src="/default/js/jquery-ui.js"></script>
+<script src="/default/js/readmore.js"></script>
+<script src="/default/js/countTo.js"></script>
+<script src="/default/js/appear.js"></script>
+<script src="/default/js/tipso.js"></script>
+<script src="/default/js/gmap3.js"></script>
+<script src="/default/js/chart.js"></script>
+<script src="/default/js/jRate.js"></script>
+<script src="/default/js/main.js"></script>
+<script type="text/javascript" src="/default/the-sweetalert-js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/default/the-sweetalert-js/sweetalert.js"></script>
+<script src="/default/socket.io/socket.io.js"></script>
 <script>
 $(document).ready(function () {
+    $('.tipso').tipso();
+    setTimeout(() => {
+    $('#wt-btnmenutoggle').click();
+        
+    }, 1);
+    function create_date(){
+        let date_obj = new Date();
+        let current_date = date_obj.toUTCString();
+        let date_arr = current_date.split(" ");
+        let timearr = date_arr[4].split(":");
+
+        if(Number(timearr[0]) > 12){
+            let meridian = 'pm';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }else{
+            let meridian = 'am';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }
+    }
+    
+    let current_page = $('title').text();
+    // console.log(current_page); return;
 
 // For Socket.io    ->
 
@@ -30,10 +54,12 @@ $(document).ready(function () {
 let socket = io();
 
 $('div#notifyBox').click(function (e) { 
+    
+    let onlineUser = $('.user-detail').text();
     e.preventDefault();
     let notificationId = $.trim( $(this).find(".notifyId").text() );
     // console.log(notificationId)
-    socket.emit('notification', notificationId);
+    socket.emit('notification', [notificationId,onlineUser]);
 });
 
 socket.on('notification-detail',( rows) => {
@@ -78,11 +104,463 @@ socket.on('notification-detail',( rows) => {
     // console.log(wtChatarea);
 })
 
+//  For Chatting System --->
+
+    if(current_page == 'inbox'){
+        function scrollTop(){
+        var chatHistory = document.getElementById('ct-chatBoxArea');
+        // messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function senderChat(profileImg,msg,date){
+            let wtOfferermessage = document.createElement("div");
+            wtOfferermessage.setAttribute('class', 'wt-offerermessage');
+            let figure = document.createElement("figure");
+            let img = document.createElement("img");
+            img.setAttribute('src','/default/uploads/profile-images/'+profileImg+'');
+            figure.appendChild(img);
+            wtOfferermessage.appendChild(figure);
+            let wtDescription = document.createElement("div");
+            wtDescription.setAttribute('class', 'wt-description');
+            let p = document.createElement("p");
+            let pMsg = document.createTextNode(msg);
+            let clearfix = document.createElement("div");
+            clearfix.setAttribute('class', 'clearfix');
+            let time = document.createElement("time");
+            time.setAttribute('datetime', '2017-08-08');
+            let theTime = document.createTextNode(date);
+            time.appendChild(theTime);
+            p.appendChild(pMsg);
+            wtDescription.appendChild(p);
+            wtDescription.appendChild(clearfix);
+            wtDescription.appendChild(time);
+            wtOfferermessage.appendChild(wtDescription);
+            // let wtChatarea = document.getElementsByClassName('wt-chatarea');
+            $('#ct-chatBoxArea').append(wtOfferermessage);
+          }
+          function recieverChat(profileImg,msg,date){
+          let wtOfferermessage = document.createElement("div");
+          wtOfferermessage.classList.add('wt-memessage', 'wt-readmessage');
+            // wtOfferermessage.setAttribute('class', 'wt-offerermessage');
+            let figure = document.createElement("figure");
+            let img = document.createElement("img");
+            img.setAttribute('src','/default/uploads/profile-images/'+recieverImg+'');
+            figure.appendChild(img);
+            wtOfferermessage.appendChild(figure);
+            let wtDescription = document.createElement("div");
+            wtDescription.setAttribute('class', 'wt-description');
+            let p = document.createElement("p");
+            let pMsg = document.createTextNode(msg);
+            let clearfix = document.createElement("div");
+            clearfix.setAttribute('class', 'clearfix');
+            let time = document.createElement("time");
+            time.setAttribute('datetime', '2017-08-08');
+            let theTime = document.createTextNode(date);
+            let clearfix2 = document.createElement("div");
+            clearfix2.setAttribute('class', 'clearfix');
+            time.appendChild(theTime);
+            p.appendChild(pMsg);
+            wtDescription.appendChild(p);
+            wtDescription.appendChild(clearfix);
+            wtDescription.appendChild(time);
+            wtDescription.appendChild(clearfix2);
+            wtOfferermessage.appendChild(wtDescription);
+            // let wtChatarea = document.getElementsByClassName('wt-chatarea');
+            $('#ct-chatBoxArea').append(wtOfferermessage);
+          }
+        let onlineUser = $('.user-detail').text();
+        let chatId = $('.chat-id').text();
+        let reciever = $('.seller-detail').text();
+        let textarea = document.getElementById('ct-chat-textarea');
+        let profileImg = $('.profile-img').text();
+        let recieverImg = $('.reciever-img').text();
+
+        let conversationDetails = {
+                onlineUser:onlineUser,
+                reciever:reciever,
+                room:chatId,
+        }
+        // console.log(conversationDetails); 
+        if(onlineUser !== '' && reciever !== ''){
+            socket.emit('join',conversationDetails);
+        }
+
+        textarea.addEventListener('keydown', (e) => {
+                // console.log('yay');return;
+            if(e.which === 13 && e.shiftKey === false){
+                e.preventDefault();
+                let msg = $('#ct-chat-textarea').val();
+                if(msg !== ''){
+                        
+                    socket.emit('chat-message', {msg:msg, to:conversationDetails});
+                    $('#ct-chat-textarea').val('');
+                    let date = create_date();
+                    senderChat(profileImg,msg,date);
+                    scrollTop();
+                }
+
+                
+                return false;
+            }else{}
+            
+        })
+
+        $('.ct-user-send-msg').click(function (e) { 
+            e.preventDefault();
+                let msg = $('#ct-chat-textarea').val();
+                if(msg !== ''){
+                        
+                    socket.emit('chat-message', {msg:msg, to:conversationDetails});
+                    $('#ct-chat-textarea').val('');
+                    let date = create_date();
+                    senderChat(profileImg,msg,date);
+                    scrollTop();
+                }
+            
+        });
+
+        socket.on('chat-message', (msg)=> {
+        //   console.log(msg);
+          
+          recieverChat(recieverImg,msg.message,msg.time_created);
+          scrollTop();
+        });
+
+        socket.on('prev-chat-message',(msg)=>{
+            // console.log(msg);
+            for (let i = 0; i < msg.length; i++) {
+                if(msg[i].sender == onlineUser){
+                    senderChat(profileImg,msg[i].message,msg[i].time_created);
+                    scrollTop();
+                }else{
+                    recieverChat(recieverImg,msg[i].message,msg[i].time_created);
+                    scrollTop();
+                }
+                
+            }
+        })
+          
+
+
+    }
+
+
+
 // For Socket.io    ->
 
 
 
+// for user-support page
 
+
+
+if(current_page == 'user_support'){
+
+            function scrollTop(){
+                var chatHistory = document.getElementById('xt-chatBoxArea');
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+
+            function senderChat(profileImg,msg,date){
+            let wtOfferermessage = document.createElement("div");
+            wtOfferermessage.setAttribute('class', 'wt-offerermessage');
+            let figure = document.createElement("figure");
+            let img = document.createElement("img");
+            img.setAttribute('src','/default/uploads/profile-images/'+profileImg+'');
+            figure.appendChild(img);
+            wtOfferermessage.appendChild(figure);
+            let wtDescription = document.createElement("div");
+            wtDescription.setAttribute('class', 'wt-description');
+            let p = document.createElement("p");
+            let pMsg = document.createTextNode(msg);
+            let clearfix = document.createElement("div");
+            clearfix.setAttribute('class', 'clearfix');
+            let time = document.createElement("time");
+            time.setAttribute('datetime', '2017-08-08');
+            let theTime = document.createTextNode(date);
+            time.appendChild(theTime);
+            p.appendChild(pMsg);
+            wtDescription.appendChild(p);
+            wtDescription.appendChild(clearfix);
+            wtDescription.appendChild(time);
+            wtOfferermessage.appendChild(wtDescription);
+            // let wtChatarea = document.getElementsByClassName('wt-chatarea');
+            $('#xt-chatBoxArea').append(wtOfferermessage);
+            }
+            function recieverChat(profileImg,msg,date){
+            let wtOfferermessage = document.createElement("div");
+            wtOfferermessage.classList.add('wt-memessage', 'wt-readmessage');
+            // wtOfferermessage.setAttribute('class', 'wt-offerermessage');
+            let figure = document.createElement("figure");
+            let img = document.createElement("img");
+            img.setAttribute('src','/default/uploads/profile-images/'+recieverImg+'');
+            figure.appendChild(img);
+            wtOfferermessage.appendChild(figure);
+            let wtDescription = document.createElement("div");
+            wtDescription.setAttribute('class', 'wt-description');
+            let p = document.createElement("p");
+            let pMsg = document.createTextNode(msg);
+            let clearfix = document.createElement("div");
+            clearfix.setAttribute('class', 'clearfix');
+            let time = document.createElement("time");
+            time.setAttribute('datetime', '2017-08-08');
+            let theTime = document.createTextNode(date);
+            let clearfix2 = document.createElement("div");
+            clearfix2.setAttribute('class', 'clearfix');
+            time.appendChild(theTime);
+            p.appendChild(pMsg);
+            wtDescription.appendChild(p);
+            wtDescription.appendChild(clearfix);
+            wtDescription.appendChild(time);
+            wtDescription.appendChild(clearfix2);
+            wtOfferermessage.appendChild(wtDescription);
+            // let wtChatarea = document.getElementsByClassName('wt-chatarea');
+            $('#xt-chatBoxArea').append(wtOfferermessage);
+            }
+            let onlineUser = $('.user-detail').text();
+            let chatId =  $.trim($('.xt-chat-id').text());
+            // let reciever = $('.seller-detail').text();
+            let textarea = document.getElementById('xt-chat-textarea');
+            let profileImg = $.trim($('.profile-img').text());
+            let recieverImg = '/default/images/sidebar/img-01.jpg';
+
+            let supportDetails = {
+                onlineUser:onlineUser,
+                // reciever:reciever,
+                room:chatId,
+            }
+            console.log(supportDetails)
+            if(onlineUser !== '' ){
+            socket.emit('join-support',supportDetails);
+            }
+
+            textarea.addEventListener('keydown', (e) => {
+                // console.log('yay');
+                // return;
+            if(e.which === 13 && e.shiftKey === false){
+                e.preventDefault();
+                let msg = $('#xt-chat-textarea').val();
+                if(msg !== ''){
+                    // console.log(msg);
+                    socket.emit('support-message', {msg:msg, to:supportDetails});
+                    $('#xt-chat-textarea').val('');
+                    let date = create_date();
+                    senderChat(profileImg,msg,date);
+                    scrollTop();
+                }
+
+                
+                return false;
+            }else{}
+
+            })
+
+            $('.xt-user-send-msg').click(function (e) { 
+                e.preventDefault();
+                let msg = $('#xt-chat-textarea').val();
+                if(msg !== ''){
+                        
+                    socket.emit('support-message', {msg:msg, to:supportDetails});
+                    $('#xt-chat-textarea').val('');
+                    let date = create_date();
+                    senderChat(profileImg,msg,date);
+                    scrollTop();
+                }
+
+            });
+
+            // socket.on('support-message', (msg)=> {
+            // //   console.log(msg);
+
+            //   recieverChat(recieverImg,msg.message,msg.time_created);
+            //   scrollTop();
+            // });
+
+            socket.on('prev-admin-message',(msg)=>{
+            console.log(msg);
+            for (let i = 0; i < msg.length; i++) {
+                if(msg[i].sender == onlineUser){
+                // if(current_page == 'user_support'){
+                    senderChat(profileImg,msg[i].message,msg[i].date_sent);
+                    scrollTop();
+                }else{
+                    recieverChat(recieverImg,msg[i].message,msg[i].date_sent);
+                    scrollTop();
+                }
+                
+            }
+            })
+
+            socket.on('support-message',(msg)=>{
+            console.log(msg);
+            // for (let i = 0; i < msg.length; i++) {
+                if(msg.sender == onlineUser){
+                // if(current_page == 'user_support'){
+                    senderChat(profileImg,msg.message,msg.date_sent);
+                    scrollTop();
+                }else{
+                    recieverChat(recieverImg,msg.message,msg.date_sent);
+                    scrollTop();
+                }
+                
+            // }
+            })
+
+
+
+}
+
+if(current_page == 'view-gigs'){
+            
+            $('.xt-edit-btn').tipso({ 
+                titleContent:null,
+                content:'Edit this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            
+            $('.xt-delete-btn').tipso({ 
+                titleContent:null,
+                content:'Delete this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+
+                $('.xt-delete-btn').click(function (e) { 
+                    e.preventDefault();
+                    $('.xt-delete-gig-id').remove();
+                    let val = $(this).attr('gig-id');
+                    // console.log(val)
+                    let input_title = document.createElement('input');
+                    input_title.classList.add('form-control', 'xt-delete-gig-id');
+                    input_title.setAttribute('type','hidden');
+                    input_title.setAttribute('name','gig_id');
+                    input_title.setAttribute('value',val);
+                    let modal_div = document.getElementById('ct-delete-gig-form');
+                    modal_div.appendChild(input_title);
+                });
+
+                $('.ct-delete-this-gig').click(function (e) {
+                    e.preventDefault();
+                    let delete_gig_form = $('#ct-delete-gig-form').serializeArray();
+                    // console.log(delete_gig_form); 
+                    // return;
+                    $.ajax({
+                        type: "post",
+                        url: "/to-switch/delete-this-gig",
+                        data: delete_gig_form,
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response); 
+                            // return;
+                            if(response[0].message !== 'This gig has been deleted!'){
+                                swal('Sorry',response[0].message,'error');
+                            }else if(response[0].message == 'This gig has been deleted!'){
+                                swal('Congratulations',response[0].message,'success');
+                                setTimeout(() => {
+                                    window.location.href = 'View-Gigs';
+                                }, 3000);
+                                // 
+                            }
+                        }
+                    });
+                });
+}
+
+if(current_page == 'edit-gig'){
+
+    
+            
+    $('.xt-delete-btn').tipso({ 
+                titleContent:null,
+                content:'Delete this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+
+
+    $('.xt-delete-btn').click(function (e) { 
+                    e.preventDefault();
+                    $('.xt-delete-gig-id').remove();
+                    let val = $(this).attr('gig-id');
+                    // console.log(val)
+                    let input_title = document.createElement('input');
+                    input_title.classList.add('form-control', 'xt-delete-gig-id');
+                    input_title.setAttribute('type','hidden');
+                    input_title.setAttribute('name','gig_id');
+                    input_title.setAttribute('value',val);
+                    let modal_div = document.getElementById('ct-delete-gig-form');
+                    modal_div.appendChild(input_title);
+                });
+
+                $('.ct-delete-this-gig').click(function (e) {
+                    e.preventDefault();
+                    let delete_gig_form = $('#ct-delete-gig-form').serializeArray();
+                    // console.log(delete_gig_form); 
+                    // return;
+                    $.ajax({
+                        type: "post",
+                        url: "/to-switch/delete-this-gig",
+                        data: delete_gig_form,
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response); 
+                            // return;
+                            if(response[0].message !== 'This gig has been deleted!'){
+                                swal('Sorry',response[0].message,'error');
+                            }else if(response[0].message == 'This gig has been deleted!'){
+                                swal('Congratulations',response[0].message,'success');
+                                setTimeout(() => {
+                                    window.location.href = 'View-Gigs';
+                                }, 3000);
+                                // 
+                            }
+                        }
+                    });
+                });
+}
+
+
+
+
+
+
+
+// For Seller Review
+
+            $('.ct-review-this-seller').click(function (e) { 
+                e.preventDefault();
+                let review = $('#ct-review-seller-text').val();
+                let reviewer_id = $('p.ct-compare-onlineUserEmail').text();
+                let seller_id = $('p.ct-compare-gigOwnerEmail').text();
+                let data = {
+                    "review": review,
+                    "seller_id": seller_id,
+                    "reviewer_id": reviewer_id,
+                }
+                // console.log(data); 
+                $.ajax({
+                    type: "post",
+                    url: "/review-this-seller",
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        if(response[0].message !== 'Review Submitted. Awaiting confirmation!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Review Submitted. Awaiting confirmation!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(refpage,4000);  
+                        }
+                    }
+                });
+
+            });
+
+
+
+// For Seller Review    -->
 
 
 
@@ -91,6 +569,7 @@ socket.on('notification-detail',( rows) => {
 
 
 // for file upload response -->
+if(current_page == 'userProfile'){
     let error = $('#file-upload-error').val();
     // console.log(error)
     if(error !== '' && error !== null && error !== undefined){
@@ -102,16 +581,62 @@ socket.on('notification-detail',( rows) => {
         }
         
     }
+}
 
+
+if(current_page == 'edit-gig'){
+    let error = $('#gig-cover-error').val();
+    console.log(error)
+    if(error !== '' && error !== null && error !== undefined){
+        if(error === 'File Uploaded!'){
+            swal('Congratulations',error,'success');
+                     setTimeout(redirectPage_gig,1000);
+        }else{
+            swal('Sorry',error,'error');
+        }
+        
+    }
+}
 // for file upload response <--
+
+//job profile contact seller
+
+        $('.ct-contact-seller').click(function (e) { 
+            e.preventDefault();
+            // console.log("man");
+            let user = $('#ct-contact-seller > button').attr("id");
+            let path = $('#ct-contact-seller > .ct-inbox-path').attr("id");
+            let onlineUserEmail = $('p.ct-compare-onlineUserEmail').text();
+            let gigOwnerEmail = $('p.ct-compare-gigOwnerEmail').text();
+            // console.log(gigOwnerEmail);return;
+            if (onlineUserEmail !== undefined) {
+                if(onlineUserEmail !== gigOwnerEmail){
+                    if(user=="true"){
+                    window.location.href = path;
+                    }else{
+                        swal('','Log in to contact this user.','info');
+                    }
+                }else{
+                    swal('','You can\'t inbox your account ','info');
+                }
+                
+            } else {
+                        swal('','Log in to contact this user.','info');
+                
+            }
+        });
+
+
+
+//job profile contact seller <--
         
 
 // for creating new Gig
 
 
 
-$('#ct-gig-maincategory').change(function (e) { 
-        // console.log('heyy'); 
+            $('#ct-gig-maincategory').change(function (e) { 
+                // console.log('heyy'); 
                 e.preventDefault();
                 $('#ct-gig-subcategory > *').remove('#rem');
                 var category_id = $(this).val();
@@ -119,6 +644,7 @@ $('#ct-gig-maincategory').change(function (e) {
                     'gigMainCategory':category_id,
                 });
                 // console.log(fdata);
+                // return;
 
                 $.ajax({
                     type: "post",
@@ -126,7 +652,7 @@ $('#ct-gig-maincategory').change(function (e) {
                     data: fdata,
                     dataType: "json",
                     success: function (response) { 
-                        // console.log(response);
+                        // console.log(response); return;
                             for(var i = 0; i < response.length; i++) {
                                 var inArray = response[i];
                                 for(var j = 0; j < inArray.length; j++) {
@@ -162,11 +688,11 @@ $('#ct-gig-maincategory').change(function (e) {
                     dataType: "json",
                     success: function (response) {
                         console.log(response); 
-                        if(response[0].message !== 'Gig created successfully!'){
+                        if(response[0].message !== 'Gig created successfully\n Proceed to edit Gig to add cover photo for this Gig!'){
                             swal('Sorry',response[0].message,'error');
-                        }else if(response[0].message == 'Gig created successfully!'){
+                        }else if(response[0].message == 'Gig created successfully\n Proceed to edit Gig to add cover photo for this Gig!'){
                             swal('Congratulations',response[0].message,'success');
-                            setTimeout(refpage,1000);  
+                            setTimeout(refpage,4000);  
                         }
 
 
@@ -178,6 +704,116 @@ $('#ct-gig-maincategory').change(function (e) {
 
 
 // for creating new Gig <--
+
+// Editing Gig <--
+
+if(current_page == 'edit-gig'){
+
+    $('#edit-gig-subcategory > *').remove('#rem');
+                var category_id = $('#edit-gig-maincategory').val();
+                let sub_cat = $('#xt-gig-subcat-id').text();
+                var fdata = ({
+                    'gigMainCategory':category_id,
+                });
+                // console.log(fdata);return;
+                $.ajax({
+                    type: "post",
+                    url: "/gig-get-subCategory",
+                    data: fdata,
+                    dataType: "json",
+                    success: function (response) { 
+                        // console.log(response); return;
+                            for(var i = 0; i < response.length; i++) {
+                                var inArray = response[i];
+                                for(var j = 0; j < inArray.length; j++) {
+                                   if(j==0){
+                                       var cval = response[i][j];
+                                   }else{
+                                       if(response[i][j] == sub_cat){
+                                        $('#edit-gig-subcategory').append('<option id="rem" selected="selected" value="'+response[i][j]+'">'+cval+'</option>');
+                                       }else{
+                                        $('#edit-gig-subcategory').append('<option id="rem" value="'+response[i][j]+'">'+cval+'</option>');
+                                       }
+                                    
+                                   }
+                                }
+                            }
+                    }
+                });
+
+    $('.edit-gig').click(function (e) { 
+                e.preventDefault();
+                let title = $('#edit-gig-title').val();
+                let category = $('#edit-gig-maincategory').val();
+                let sub_cat = $('#edit-gig-subcategory').val();
+                let gig_id = $('#gig-id').val();
+                let data = {
+                    "gig_title": title,
+                    "main_category": category,
+                    "sub_category": sub_cat,
+                    "unique_id":gig_id,
+                }
+                
+                console.log(data); 
+                
+
+                $.ajax({
+                    type: "post",
+                    url: "/edit-this-gig",
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response); 
+                        if(response[0].message !== 'Gig Updated Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Gig Updated Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(refpage,1000);  
+                        }
+
+
+                    }
+                });
+
+            });
+
+
+    $('#edit-gig-maincategory').change(function (e) { 
+                // console.log('heyy'); 
+                e.preventDefault();
+                $('#edit-gig-subcategory > *').remove('#rem');
+                var category_id = $(this).val();
+                var fdata = ({
+                    'gigMainCategory':category_id,
+                });
+                $.ajax({
+                    type: "post",
+                    url: "/gig-get-subCategory",
+                    data: fdata,
+                    dataType: "json",
+                    success: function (response) { 
+                        // console.log(response); return;
+                            for(var i = 0; i < response.length; i++) {
+                                var inArray = response[i];
+                                for(var j = 0; j < inArray.length; j++) {
+                                   if(j==0){
+                                       var cval = response[i][j];
+                                   }else{
+                                    $('#edit-gig-subcategory').append('<option id="rem" value="'+response[i][j]+'">'+cval+'</option>');
+                                   }
+                                }
+                            }
+                    }
+                });
+            });
+}
+
+
+
+            
+
+
+// Editing Gig
     
     $('.register').click(function (e) { 
         e.preventDefault();
@@ -213,7 +849,7 @@ $('#ct-gig-maincategory').change(function (e) {
 
         $.ajax({
             type: "post",
-            url: "login",
+            url: "/login",
             data: data,
             dataType: "json",
             success: function (response) {
@@ -280,9 +916,6 @@ $('#ct-gig-maincategory').change(function (e) {
         let details = {
             userDescription: userDescription[0].value,
         } 
-        
-        
-
         let skills = '';
         // $('input:checkbox[ct=services]').each(function(){
             for(let i = 0; i<=6; i++ ){
@@ -294,13 +927,7 @@ $('#ct-gig-maincategory').change(function (e) {
                 }
             }
         // })
-
-
-
         details.skills = skills;
-
-
-
         console.log(details); 
         $.ajax({
             type: "post",
@@ -470,6 +1097,11 @@ $('#ct-gig-maincategory').change(function (e) {
 });
 function redirectPage(){
     window.location.href = "http://localhost:3000/my-profile";
+}
+function redirectPage_gig(){
+    let id = $('#ct-gig-uniq_id').val();
+    
+    window.location.href = "http://localhost:3000/edit-Gig/"+id+"";
 }
 function refpage(){
 		window.location.reload();

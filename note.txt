@@ -1,6 +1,22 @@
-REFERENCES: https://www.sitepoint.com/using-node-mysql-javascript-client/
+AIM OF DOC:
+  To explain structure, research and how the project was built.
 
-https://stackoverflow.com/questions/30545749/how-to-provide-a-mysql-database-connection-in-single-file-in-nodejs
+REFERENCES: 
+  https://www.sitepoint.com/using-node-mysql-javascript-client/
+
+  https://stackoverflow.com/questions/30545749/how-to-provide-a-mysql-database-connection-in-single-file-in-nodejs
+
+  https://www.freecodecamp.org/news/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c/
+
+  https://plan.io/blog/technical-documentation/
+  https://www.sitepoint.com/writing-software-documentation/
+
+
+
+
+
+
+
 
 
 mysql_query.query('SELECT * from your_table where ?', {id: '1'}, function(err, rows)   {
@@ -64,3 +80,11 @@ var query = connection.query(sql, ["Vinayak", "Patil", 1], function(err, result)
 connection.end();
 
 Multer: this is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files
+
+
+Promises:=>
+it's like a temporary holder for a value.when an asynchronuous action finishes the promise will be notified if there is an error or there is a smooth operation and there is a value to work with. after this, you can resolve or reject the promise.
+
+  "Sir continue running, i promise to get back a value to you when am done running please".
+
+  Technical Documentation:

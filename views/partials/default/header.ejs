@@ -5,7 +5,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <strong class="wt-logo">
                                 <a href="/">
-                                    <img src="/images/profiler-logo-writeup.png" alt="company logo here">
+                                    <img src="/default/images/profiler-logo-writeup.png" alt="company logo here">
                                 </a>
                             </strong>
                             <div class="wt-rightarea">
@@ -16,13 +16,13 @@
                                     <div class="collapse navbar-collapse profiler-navigation" id="navbarNav">
                                         <ul class="navbar-nav">
                                             <li class="nav-item">
-                                                <a href="register-page">Become a Seller</a>
+                                                <a href="/register-page">Become a Seller</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="how-it-works-page">How It Works</a>
+                                                <a href="/how-it-works-page">How It Works</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="about-us-page">About Us</a>
+                                                <a href="/about-us-page">About Us</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -30,21 +30,24 @@
                                 <div class="wt-loginarea">
                                     <% if(userId){ %>
                                     <a href="/user">
-                                            <figure class="wt-userimg" tooltip="My Dashboard">
-                                                    <img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
-                                                </figure>
+                                        <figure class="wt-userimg" tooltip="My Dashboard">
+                                            <img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
+                                        </figure>
                                     </a>
                                     <div class="wt-loginoption ">
                                         <div class="ct-online"></div>
                                         <a href="/user" id="" class="wt-loginbtn"><%= user[0].firstName %></a>
-                                    <% }else{ %>
-                                        
-                                    <figure class="wt-userimg">
-                                            <img src="/images/avatar.jpg" alt="img description">
-                                        </figure>
-                                        <div class="wt-loginoption">
-                                            <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn">Login</a>
-                                    <% } %>
+                                    <% }else if(page == "inbox" || page == "job-profile"){ %>
+                                        <figure class="wt-userimg">
+                                            </figure>
+                                            <div class="wt-loginoption">
+                                    <% }else { %>
+                                        <figure class="wt-userimg">
+                                                <img src="/default/images/avatar.jpg" alt="img description">
+                                            </figure>
+                                            <div class="wt-loginoption">
+                                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn">Login</a>
+                                        <%} %>
                                         <div class="wt-loginformhold">
                                             
                                             <div class="wt-loginheader">
@@ -64,7 +67,7 @@
                                                         <input type="password" name="password" class="form-control" placeholder="Password">
                                                     </div>
                                                     <div class="wt-logininfo">
-                                                        <button class="wt-btn do-login-button log-in">Login</button>
+                                                    <button class="wt-btn do-login-button log-in">Login</button>
                                                         <span class="wt-checkbox">
 																<input id="wt-login" type="checkbox" name="rememberme">
 																<label for="wt-login">Keep me logged in</label>
@@ -73,7 +76,7 @@
                                                 </fieldset>
                                                 <div class="wt-loginfooterinfo">
                                                     <a href="javascript:;" class="wt-forgot-password">Forgot password?</a>
-                                                    <a href="register-page">Create account</a>
+                                                    <a href="/register-page">Create account</a>
                                                 </div>
                                             </form>
                                             <form class="wt-formtheme wt-loginform do-forgot-password-form wt-hide-form">
@@ -88,12 +91,12 @@
                                                 </fieldset>
                                                 <div class="wt-loginfooterinfo">
                                                     <a href="javascript:void(0);" class="wt-show-login">Login</a>
-                                                    <a href="register.html">Create account</a>
+                                                    <a href="/register-page">Create account</a>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-                                    <a href="register-page" class="wt-btn">Join Now</a>
+                                    <a href="/register-page" class="wt-btn">Join Now</a>
                                 </div>
                                 
                             </div>
@@ -107,10 +110,10 @@
                                                 <a href="javascript:void(0);">Artisans</a>
                                                 <ul class="sub-menu">
                                                     <li>
-                                                        <a href="category-profile-page">Plumbers</a>
+                                                        <a href="/category-profile-page">Plumbers</a>
                                                     </li>
                                                     <li>
-                                                        <a href="category-profile-page">Brick Layers</a>
+                                                        <a href="/category-profile-page">Brick Layers</a>
                                                     </li>
                                                 </ul>
                                             </li>

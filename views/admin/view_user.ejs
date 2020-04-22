@@ -1,0 +1,142 @@
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    <div class="container-fluid">
+                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="card" style="border: solid 1px #787878;">
+                                    <div class="card-block">
+                                        <h4 class="card-title">Users</h4>                    <div class="table-overflow">
+                                            <table class="table table-hover table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th><i style="color:#13CB22" class="ti-user"></i> Full Name</th>
+                                                        <th><i style="color: #004CFF" class="ti-email"></i> Email</th>
+                                                        <th> <i style="color:#FF0004" class="ti-mobile"></i>Phone No.</th>
+                                                        <th><i style="color: #FF00C6" class="ti-calendar"></i> Member_Since</th>
+                                                        <th><i style="color: #FF6700" class="ti-agenda"></i> Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for(var i=0; allUser[i]; i++){ %>
+                                                    <tr>
+                                                        <td><%= allUser[i].firstName %> <%= allUser[i].lastName %></td>
+                                                        <td><%= allUser[i].email %></td>
+                                                        <td><%= allUser[i].number %></td>
+                                                        <td><%= allUser[i].date_joined %></td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <a class="btn btn-primary" href="edit_user/<%= allUser[i].email %>"><i class="c-red-500 ti-pencil"></i></a>
+                                                                <% if(allUser[i].blocked == '1' ){ %>
+                                                                <a data-toggle="modal" class="btn btn-outline-danger" user-id="<%= allUser[i].email %>" href="#myModullBLOCK"><i class="ti-lock"></i></a>
+                                                                <% } else if(allUser[i].blocked == '0'){ %>
+                                                                <a data-toggle="modal" class="btn btn-outline-success" user-id="<%= allUser[i].email %>" href="#myModullUNBLOCK"><i class="ti-unlock"></i></a>
+                                                                <% } %>
+                                                                <a data-toggle="modal" class="btn btn-danger" user-id="<%= allUser[i].email %>" href="#myModullDELL"><i class="c-red-500 ti-trash"></i></a>
+                                                            
+                                                            </div> 
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Modal -->
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullBLOCK" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title"> Block User?</h4>
+                                </div>
+                                <div class="modal-body">
+                                <p>Are you sure you want to Block this User?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form id="ct-block-user-form">
+                                        <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+                                        <button class="btn btn-success ct-block-this-user" onClick="">Block</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+		          </div>
+<!-- modal --> 
+               
+                 <!-- Modal -->
+		    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullUNBLOCK" class="modal fade">
+		       <div class="modal-dialog">
+		         <div class="modal-content">
+		           <div class="modal-header">
+		             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		               <h4 class="modal-title"> Unblock User?</h4>
+		           </div>
+		       <div class="modal-body">
+		       <p>Are you sure you want to Unblock this User?</p>
+		       </div>
+               <div class="modal-footer">
+                   <form id="ct-unblock-user-form">
+                       <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+                       <button class="btn btn-success ct-unblock-this-user" onClick="">Unblock</button>
+                   </form>
+               </div>
+		          </div>
+		              </div>
+		          </div>
+<!-- modal -->
+				
+					
+                 <!-- Modal -->
+		    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullDELL" class="modal fade">
+		       <div class="modal-dialog">
+		         <div class="modal-content">
+		           <div class="modal-header">
+		             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		               <h4 class="modal-title"> Delete User?</h4>
+		           </div>
+		       <div class="modal-body">
+		       <p>Are you sure you want to Delete this User?</p>
+		       </div>
+               <div class="modal-footer">
+                   <form id="ct-delete-user-form">
+                       <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+                       <button class="btn btn-success ct-delete-this-user" onClick="">Delete</button>
+                   </form>
+               </div>
+		          </div>
+		              </div>
+		          </div>
+<!-- modal -->
+					
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <!-- Content Wrapper END -->
+
+                <!-- Footer START -->
+                <footer class="content-footer">
+                    <div class="footer">
+                        <div class="copyright">
+                            <span>Copyright © 2017 <b class="text-dark">Theme_Nate</b>. All rights reserved.</span>
+                            <span class="go-right">
+									<a href="#" class="text-gray mrg-right-15">Term &amp; Conditions</a>
+									<a href="#" class="text-gray">Privacy &amp; Policy</a>
+								</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer END -->

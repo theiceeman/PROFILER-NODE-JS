@@ -1,0 +1,115 @@
+
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="widget-profile-1 card" style="border: solid 1px #454545;">
+                                        <div class="profile border bottom xt-img-box">
+                                                <div class="xt-cover-img">
+                                                        <img class="mrg-top-30" src="/default/uploads/profile-images/<%= userChat[0].profile_image %>" alt="">
+                
+                                                </div>
+                                            </div>
+                                    <div class="pdd-horizon-30 pdd-vertical-20">
+                                        <h5 class="text-semibold mrg-btm-5">Details</h5>
+                                        <br />
+                                        <span>
+                                            <p > 
+                                                <span style="color: #515365;font-size:13px;">Email:</span>
+                                                <%= userChat[0].email %><p/>
+                                            
+                                        </span>
+                                        
+                                        <span> 
+                                            <p > <span style="color: #515365;font-size:13px;">Member Since:</span><%= userChat[0].date_joined %><p/>
+                                        </span>
+                                        
+                                        <span> 
+                                            <p > <span style="color: #515365;font-size:13px;">
+                                                Phone:</span><%= userChat[0].number %> 
+                                            <p/>
+                                            <p style="display:none" class="chat-id"><%= convDetails[0].conversation_id %></p>
+                                            <p style="display:none" class="xt-user"><%= userChat[0].email %></p>
+                                            <p style="display:none" class="xt-online-pdd50"><%= adminDetails[0].email %></p>
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="card" style="border: 1px solid #454545;">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4 class="card-title">Chat</h4>
+                                                <hr>
+                                                <div  role="tabpanel" class="tab-pane">
+                                                    <div class="chat">
+                                                        <div class="chat-user-list scrollable" style="padding-left: 0px; margin-left: 0px;">
+                                                            <div class="conversation">
+                                                                <div class="conversation-wrapper">
+                                                                    <div class="conversation-header">
+                                                                        <span class="user-name">
+                                                                                @<%= userChat[0].firstName %><%= userChat[0].lastName %>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div id="xt-support_box" class="conversation-body pre-scrollable" style="margin-right: 20px;">
+                                                                        <!-- <div class="msg">
+                                                                            <div class="bubble me">
+                                                                                <span>
+                                                                                    Feeling all right, sir?
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="msg">
+                                                                            <div class="bubble friend">
+                                                                                <span>Just like new</span>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="conversation-footer">
+                                                                        <button class="upload-btn">
+                                                                            <i class="ti-camera"></i>
+                                                                        </button>
+                                                                        <textarea id="xt-chat-text-area" class="form-control chat-input" type="text" placeholder="Type a message..."> 
+                                                                        </textarea>
+                                                                        <button class="sent-btn ct-admin-send-btn">
+                                                                            <i class="fa fa-send-o"></i>
+                                                                        </button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Content Wrapper END -->
+
+                <!-- Footer START -->
+                <footer class="content-footer">
+                    <div class="footer">
+                        <div class="copyright">
+                            <span>Copyright © 2017 <b class="text-dark">Theme_Nate</b>. All rights reserved.</span>
+                            <span class="go-right">
+                                <a href="#" class="text-gray mrg-right-15">Term &amp; Conditions</a>
+                                <a href="#" class="text-gray">Privacy &amp; Policy</a>
+                            </span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer END -->

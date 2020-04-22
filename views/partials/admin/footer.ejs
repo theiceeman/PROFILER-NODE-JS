@@ -1,0 +1,857 @@
+
+	<script src="/admin/js/vendor.js"></script>
+	<!-- <script src="/admin/js/jquery_3_4_1.js"></script> -->
+	<script src="/admin/vendors/bower-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="/admin/js/jquery_3_4_1.js"></script>
+	<script src="/admin/js/maps/jquery-jvectormap-us-aea.js"></script>
+	<script src="/admin/vendors/d3/d3.min.js"></script>
+	<script src="/admin/vendors/nvd3/build/nv.d3.min.js"></script>
+	<script src="/admin/vendors/jquery.sparkline/index.js"></script>
+	<script src="/admin/vendors/chart.js/dist/Chart.min.js"></script>
+	<script src="/admin/js/app.min.js"></script>
+	<script src="/admin/js/dashboard/dashboard.js"></script>
+    <script src="/admin/vendors/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script src="/admin/js/tipso.js"></script>
+	<script type="text/javascript" src="/default/the-sweetalert-js/sweetalert.min.js"></script>
+	<script type="text/javascript" src="/default/the-sweetalert-js/sweetalert.js"></script>
+    <script src="/default/socket.io/socket.io.js"></script>
+	<script>
+        $(document).ready(function () {
+            // noty({ text: 'My first notification using noty'});
+            $('.tipso').tipso();
+            let socket = io();
+
+            socket.emit('other-admin-view','tester');
+            socket.on('new-message-notify',(msg)=>{
+                // console.log(msg);
+                noty({
+                    text: 'Admin, you have a new message',
+                    layout: 'topRight',
+                    closeWith: ['click', 'hover'],
+                    type: 'confirm'
+                });
+
+            })
+
+            function create_date(){
+        let date_obj = new Date();
+        let current_date = date_obj.toUTCString();
+        let date_arr = current_date.split(" ");
+        let timearr = date_arr[4].split(":");
+
+        if(Number(timearr[0]) > 12){
+            let meridian = 'pm';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }else{
+            let meridian = 'am';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }
+    }
+            
+        
+		let current_page = $('title').text();
+
+		if(current_page == 'Admin-Login'){
+
+			$('.xt-admin-login').click(function (e) { 
+                e.preventDefault();
+                let email = $('#xt-email-login').val();
+                let password = $('#xt-password-login').val();
+                let data = {
+                    "email": email,
+                    "password": password,
+                }
+                // console.log(data); return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/login-this-admin",
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        if(response.message !== 'login'){
+                            swal('Sorry',response.message,'error');
+                        }else if(response.message == 'login'){
+                            window.location.href = '/to-switch/admin-dashboard';
+                        }
+                    }
+                });
+
+            });
+
+
+
+        }
+        
+
+        if(current_page == 'Create-Category'){
+
+            $('.xt-create-a-category').click(function (e) { 
+                e.preventDefault();
+                let newCategory = $('#xt-create-new-category').serializeArray();
+                newCategory[1].value = $.trim(newCategory[1].value);
+                console.log(newCategory);
+                // console.log(data); return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/create-new-category",
+                    data: newCategory,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response); 
+                        // return;
+                        if(response[0].message !== 'Category Created Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Category Created Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/createcategory';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+        }
+        
+
+        if(current_page == 'Create-Sub-Category'){
+
+            $('.xt-create-sub-category').click(function (e) {
+                e.preventDefault();
+                let new_SubCategory = $('#xt-sub-category-form').serializeArray();
+                console.log(new_SubCategory);
+                // console.log(data); return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/create-sub-category",
+                    data: new_SubCategory,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response); 
+                        // return;
+                        if(response[0].message !== 'Sub-Category Created Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Sub-Category Created Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/subcategory';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+        }
+
+        if(current_page == 'All-User'){
+            // btn-outline-success
+            $('.btn-outline-danger').tipso({ 
+                titleContent:null,
+                content:'Block this User',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            $('.btn-outline-success').tipso({ 
+                titleContent:null,
+                content:'Unblock this User',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            $('.btn-danger').tipso({ 
+                titleContent:null,
+                content:'Delete this Account',
+                size: 'tiny',
+                background:'#888da8',
+            });
+
+            
+
+            $('.btn-outline-danger').click(function (e) { 
+                e.preventDefault();
+                $('.xt-user-uniq-id').remove();
+                let val = $(this).attr('user-id');
+                // console.log(val)
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-user-uniq-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','user_email');
+                input_title.setAttribute('value',val);
+                let modal_div = document.getElementById('ct-block-user-form');
+                modal_div.appendChild(input_title);
+            });
+
+            $('.ct-block-this-user').click(function (e) {
+                e.preventDefault();
+                let block_acct_form = $('#ct-block-user-form').serializeArray();
+                // console.log(block_acct_form); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/block-this-user",
+                    data: block_acct_form,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This user has been restricted access!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This user has been restricted access!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_user';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+            });
+
+            $('.btn-outline-success').click(function (e) { 
+                e.preventDefault();
+                $('.xt-unblock-user-id').remove();
+                let val = $(this).attr('user-id');
+                // console.log(val)
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-unblock-user-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','user_email');
+                input_title.setAttribute('value',val);
+                let modal_div = document.getElementById('ct-unblock-user-form');
+                modal_div.appendChild(input_title);
+            });
+
+            
+
+            $('.ct-unblock-this-user').click(function (e) {
+                e.preventDefault();
+                let unblock_acct_form = $('#ct-unblock-user-form').serializeArray();
+                // console.log(unblock_acct_form); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/unblock-this-user",
+                    data: unblock_acct_form,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This user has been granted access!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This user has been granted access!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_user';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+            });
+
+            
+
+            $('.btn-danger').click(function (e) { 
+                e.preventDefault();
+                $('.xt-delete-user-id').remove();
+                let val = $(this).attr('user-id');
+                // console.log(val)
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-delete-user-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','user_email');
+                input_title.setAttribute('value',val);
+                let modal_div = document.getElementById('ct-delete-user-form');
+                modal_div.appendChild(input_title);
+            });
+
+            
+
+            $('.ct-delete-this-user').click(function (e) {
+                e.preventDefault();
+                let delete_acct_form = $('#ct-delete-user-form').serializeArray();
+                // console.log(unblock_acct_form); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/delete-this-user",
+                    data: delete_acct_form,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This account has been deleted!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This account has been deleted!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_user';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+            });
+
+
+
+
+        }
+
+
+
+        if (current_page == 'All-Category') {
+            // let socket = io();
+
+            $('.xt_all_cats_tb').click(function (e) {
+                e.preventDefault();
+
+                let cat_id =  $.trim($(this).find('.cat_id').text());
+                // console.log(cat_id);return;
+
+                socket.emit('get-sub-categories',cat_id);
+                
+            });
+
+            socket.on('return-sub-categories',(all_sub_cats)=>{
+                let rmv_tr = document.getElementsByClassName('xt-sub-cat-tr');
+                // console.log(rmv_tr.length);
+                if(rmv_tr.length !== 0){
+                    rmv_tr[0].remove();
+                }
+
+                let tbody = document.createElement('tbody');
+                tbody.classList.add('xt-sub-cat-tr');
+
+                for (let v = 0; v < all_sub_cats.length; v++) {
+
+                            let icon = document.createElement('i');
+                            icon.classList.add('c-red-500','ti-pencil');
+                            let anchor = document.createElement('a');
+                            anchor.classList.add(all_sub_cats[v].unique_id);
+                            anchor.setAttribute('data-toggle','modal');
+                            anchor.setAttribute('data-target','#EDIT-SUB-CATEGORY');
+                            anchor.setAttribute('style','float:right; color: red;padding-right: 5px;');
+                            anchor.appendChild(icon);
+                            let second_td = document.createElement('td');
+                            second_td.setAttribute('style','cursor:pointer');
+                            second_td.setAttribute('height','50');
+                            second_td.classList.add('a-sub-cat');
+                            second_td.appendChild(anchor);
+
+
+                            let first_td_span = document.createElement('span');
+                            let first_td_text = document.createTextNode(all_sub_cats[v].title);
+                            first_td_span.appendChild(first_td_text);
+
+                            let first_td = document.createElement('td');
+                            first_td.setAttribute('height','50');
+                            first_td.appendChild(first_td_span);
+
+                            let theTr = document.createElement('tr');
+                            theTr.classList.add('xt-sub-cat-tr');
+                            theTr.appendChild(first_td);
+                            theTr.appendChild(second_td);
+
+                            // console.log(theTr);
+                            tbody.appendChild(theTr);
+                            
+                            }
+                            // console.log(tbody);
+                            let table = document.getElementById('xt-sub_cats');
+                            table.appendChild(tbody);
+            })
+
+            $('#xt-sub_cats').on('click', '.a-sub-cat',function(){
+                $('.xt-uniq-id').remove();
+                let val = $(this).find('a:first');
+                // console.log(val)
+                let the_val = val[0].getAttribute('class');
+                // console.log(val[0]);
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-uniq-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','sub_cat_id');
+                input_title.setAttribute('value',the_val);
+                let modal_div = document.getElementById('sub_cat_uniq_id');
+                modal_div.appendChild(input_title);
+
+
+            });
+
+
+            $('.xt-update-sub-cat').click(function (e) {
+                e.preventDefault();
+                let update_SubCat = $('#sub_cat_modal').serializeArray();
+                // console.log(update_SubCat); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/update-sub-category",
+                    data: update_SubCat,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'Sub-Category Updated Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Sub-Category Updated Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_category';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+
+        }
+
+
+        if(current_page == 'Edit-This-Category'){
+
+
+            $('.xt-cat-update-btn').click(function (e) {
+                e.preventDefault();
+                let update_SubCat = $('#cat-update-details').serializeArray();
+                update_SubCat[2].value = $.trim(update_SubCat[2].value);
+                // console.log(update_SubCat); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/update-main-category",
+                    data: update_SubCat,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'Main-Category Updated Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Main-Category Updated Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/editcategory/'+update_SubCat[1].value;
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+            let error = $('#category-cover-error').val();
+            let id = $('#xt_cat_uniq_id').val();
+            console.log(error)
+            if(error !== '' && error !== null && error !== undefined){
+                if(error === 'File Uploaded!'){
+                    swal('Congratulations',error,'success');
+                    setTimeout(() => {
+                                window.location.href = '/to-switch/editcategory/'+id;
+                            }, 2000);
+                }else{
+                    swal('Sorry',error,'error');
+                }
+        
+            }
+
+
+
+        }
+
+        if(current_page == 'Chat'){
+            var chatDiv = document.getElementById('xt-support_box');
+
+            // let socket = io();
+            function scrollTop(){
+                var chatHistory = document.getElementById('xt-support_box');
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+
+            function senderChat(msgNode){
+
+                let msg = document.createElement('div');
+                msg.classList.add('msg');
+                let bubbleMe = document.createElement('div');
+                bubbleMe.classList.add('bubble','me');
+                let span = document.createElement('span');
+                let theMsg = document.createTextNode(msgNode);
+                span.appendChild(theMsg);
+                bubbleMe.appendChild(span);
+                msg.appendChild(bubbleMe);
+                chatDiv.appendChild(msg);
+            }
+            function recieverChat(msgNode){
+                let msg = document.createElement('div');
+                msg.classList.add('msg');
+                let bubbleMe = document.createElement('div');
+                bubbleMe.classList.add('bubble','friend');
+                let span = document.createElement('span');
+                let theMsg = document.createTextNode(msgNode);
+                span.appendChild(theMsg);
+                bubbleMe.appendChild(span);
+                msg.appendChild(bubbleMe);
+                chatDiv.appendChild(msg);
+                // console.log(msg)
+            }
+            // recieverChat('yay')
+            
+            let chatId = $('.chat-id').text();
+            let reciever = $('.xt-user').text();
+            let textarea = document.getElementById('xt-chat-text-area');
+            let onlineAdmin =  $('.xt-online-pdd50').text();
+            // console.log(reciever);
+
+            
+
+            let conversationDetails = {
+                    reciever:reciever,
+                    room:chatId,
+                    onlineAdmin:onlineAdmin,
+            }
+
+            if(reciever !== ''){
+                socket.emit('join-admin',conversationDetails);
+            }
+
+            socket.on('prev-admin-support',(msg)=>{
+                let user_viewed = $.trim($('.xt-user').text()) ;
+                // let i = 1;
+                if(msg[0].sender == user_viewed){
+                    recieverChat(msg[0].message); //ash
+                    scrollTop();
+                }else {
+                    senderChat(msg[0].message); //blue
+                    scrollTop();
+                }
+            })
+            socket.on('admin-support-message',(msg)=>{
+                newMsg();
+                
+                console.log(msg)
+                let user_viewed = $.trim($('.xt-user').text()) ;
+                let i = 1;
+                if(msg.sender == user_viewed){
+                    recieverChat(msg.message); //ash
+                    scrollTop();
+                }else {
+                    senderChat(msg.message); //blue
+                    scrollTop();
+                }
+            })
+
+        textarea.addEventListener('keydown', (e) => {
+                // console.log('yay');return;
+            if(e.which === 13 && e.shiftKey === false){
+                e.preventDefault();
+                let msg = $.trim($('#xt-chat-text-area').val()) ;
+                if(msg !== ''){
+                        
+                    socket.emit('admin-support-message', {msg:msg, to:conversationDetails});
+                    $('#xt-chat-text-area').val('');
+                    senderChat(msg);
+                    scrollTop();
+                }
+                return false;
+            }else{
+
+            }
+                
+        })
+
+        $('.ct-admin-send-btn').click(function (e) { 
+                e.preventDefault();
+                let msg = $.trim($('#xt-chat-text-area').val()) ;
+                // console.log(msg);return;
+                if(msg !== ''){
+                        
+                    socket.emit('admin-support-message', {msg:msg, to:conversationDetails});
+                    $('#xt-chat-text-area').val('');
+                    senderChat(msg);
+                    scrollTop();
+                }
+
+            });
+          
+
+
+
+        }
+
+        if(current_page == 'Other-Administrator'){
+
+
+            $('.xt-register-admin').click(function (e) {
+                e.preventDefault();
+                let new_admin_details = $('#xt-REGISTER-ADMIN').serializeArray();
+                // console.log(new_admin_details); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/create-new-admin",
+                    data: new_admin_details,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'Admin Created Successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'Admin Created Successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/create_admin';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+
+        }
+
+        if(current_page == 'Edit-This-User'){
+
+            $('.ct-update-btn').click(function (e) {
+                e.preventDefault();
+                let update_details = $('#ct-update-user-details-form').serializeArray();
+                let email = $('#form-1-3').val();
+                update_details.push({name:'email',value:email});
+                // console.log(update_details); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/update-this-user",
+                    data: update_details,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This User\'s Personal Details Updated successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This User\'s Personal Details Updated successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/edit_user/'+email;
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+
+        }
+
+        if(current_page == 'All-Gigs'){
+
+            $('.btn-outline-danger').tipso({ 
+                titleContent:null,
+                content:'Block this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            $('.btn-outline-success').tipso({ 
+                titleContent:null,
+                content:'Unblock this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            $('.btn-danger').tipso({ 
+                titleContent:null,
+                content:'Delete this Gig',
+                size: 'tiny',
+                background:'#888da8',
+            });
+            
+
+            
+
+            $('.btn-outline-danger').click(function (e) { 
+                e.preventDefault();
+                $('.xt-gig-uniq-id').remove();
+                let val = $(this).attr('gig-id');
+                // console.log(val)
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-gig-uniq-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','gig_id');
+                input_title.setAttribute('value',val);
+                let modal_div = document.getElementById('ct-block-gig-form');
+                modal_div.appendChild(input_title);
+            });
+
+            $('.ct-block-this-gig').click(function (e) {
+                e.preventDefault();
+                let block_gig_form = $('#ct-block-gig-form').serializeArray();
+                // console.log(block_acct_form); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/block-this-gig",
+                    data: block_gig_form,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This gig is currently Inactive!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This gig is currently Inactive!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_gigs';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+            });
+            
+
+            
+
+            $('.btn-outline-success').click(function (e) { 
+                e.preventDefault();
+                $('.xt-gig-uniq-id').remove();
+                let val = $(this).attr('gig-id');
+                // console.log(val)
+                let input_title = document.createElement('input');
+                input_title.classList.add('form-control', 'xt-gig-uniq-id');
+                input_title.setAttribute('type','hidden');
+                input_title.setAttribute('name','gig_id');
+                input_title.setAttribute('value',val);
+                let modal_div = document.getElementById('ct-unblock-gig-form');
+                modal_div.appendChild(input_title);
+            });
+
+            $('.ct-unblock-this-gig').click(function (e) {
+                e.preventDefault();
+                let unblock_gig_form = $('#ct-unblock-gig-form').serializeArray();
+                // console.log(block_acct_form); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/unblock-this-gig",
+                    data: unblock_gig_form,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response); 
+                        // return;
+                        if(response[0].message !== 'This gig is Active!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This gig is Active!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/view_gigs';
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+            });
+
+            
+
+                $('.btn-danger').click(function (e) { 
+                    e.preventDefault();
+                    $('.xt-delete-gig-id').remove();
+                    let val = $(this).attr('gig-id');
+                    // console.log(val)
+                    let input_title = document.createElement('input');
+                    input_title.classList.add('form-control', 'xt-delete-gig-id');
+                    input_title.setAttribute('type','hidden');
+                    input_title.setAttribute('name','gig_id');
+                    input_title.setAttribute('value',val);
+                    let modal_div = document.getElementById('ct-delete-gig-form');
+                    modal_div.appendChild(input_title);
+                });
+
+
+
+                $('.ct-delete-this-gig').click(function (e) {
+                    e.preventDefault();
+                    let delete_gig_form = $('#ct-delete-gig-form').serializeArray();
+                    // console.log(unblock_acct_form); 
+                    // return;
+                    $.ajax({
+                        type: "post",
+                        url: "/to-switch/delete-this-gig",
+                        data: delete_gig_form,
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response); 
+                            // return;
+                            if(response[0].message !== 'This gig has been deleted!'){
+                                swal('Sorry',response[0].message,'error');
+                            }else if(response[0].message == 'This gig has been deleted!'){
+                                swal('Congratulations',response[0].message,'success');
+                                setTimeout(() => {
+                                    window.location.href = '/to-switch/view_gigs';
+                                }, 3000);
+                                // 
+                            }
+                        }
+                    });
+                });
+
+
+
+        }
+
+        if(current_page == 'Edit-This-Gig'){
+
+            $('.xt-update-gig-btn').click(function (e) {
+                e.preventDefault();
+                let update_details = $('#ct-update-gig-details-form').serializeArray();
+                // let email = $('#form-1-3').val();
+                // update_details.push({name:'email',value:email});
+                let id = update_details[0].value;
+                // console.log(update_details); 
+                // console.log(id); 
+                // return;
+                $.ajax({
+                    type: "post",
+                    url: "/to-switch/update-this-gig",
+                    data: update_details,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(id); 
+                        // return;
+                        if(response[0].message !== 'This gig title Updated successfully!'){
+                            swal('Sorry',response[0].message,'error');
+                        }else if(response[0].message == 'This gig title Updated successfully!'){
+                            swal('Congratulations',response[0].message,'success');
+                            setTimeout(() => {
+                                window.location.href = '/to-switch/edit_gigs/'+id;
+                            }, 3000);
+                            // 
+                        }
+                    }
+                });
+
+            });
+
+        }
+
+
+
+
+
+
+
+    });
+
+	</script>
+
+</body>
+</html>

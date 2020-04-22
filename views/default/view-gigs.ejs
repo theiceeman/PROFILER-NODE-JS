@@ -8,6 +8,7 @@
                 <!--Header End-->
                 <!--Main Start-->
                 <main id="wt-main" class="wt-main wt-haslayout custom-main">
+                    
                         <!--Sidebar Start-->
                         <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
                                 <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
@@ -20,10 +21,10 @@
                                 <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
                                     <div class="wt-companysdetails wt-usersidebar">
                                         <figure class="wt-companysimg">
-                                            <img src="/images/sidebar/img-01.jpg" alt="img description">
+                                            <img src="/default/images/sidebar/img-01.jpg" alt="img description">
                                         </figure>
                                         <div class="wt-companysinfo">
-                                                <figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+                                                <figure><img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
                                             <div class="wt-title">
                                                 <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
                                                 <span>Amento Tech</span>
@@ -62,13 +63,13 @@
                                                 </ul>
                                             </li>
                                             <li class="wt-active">
-                                                <a href="dashboard-profile.html">
+                                                <a href="/user_support">
                                                     <i class="ti-layers"></i>
                                                     <span>Help & Support</span>
                                                 </a>
                                             </li>
                                             <li class="wt-active">
-                                                <a href="dashboard-profile.html">
+                                                <a href="/logout">
                                                     <i class="ti-key"></i>
                                                     <span>Logout</span>
                                                 </a>
@@ -85,72 +86,55 @@
                                         <div class="wt-haslayout wt-dbsectionspace">
                                             <div class="wt-dashboardbox wt-dashboardtabsholder">
                                                 <div class="wt-dashboardboxtitle">
-                                                    <h2>ACTIVE GIGS</h2>
+                                                    <h2>YOUR GIGS</h2>
                                                 </div>
                                                 <div class="wt-tabscontent tab-content gig-tab">
-                                                        <div style="float:left;" class="col-sm-6 col-md-3 col-lg-4 ">
-                                                            <!-- gig-content -->
+                                                    <% for(var i=0; gig[i]; i++){ %>
+                                                            <div style="float:left;" class="col-sm-6 col-md-3 col-lg-4 ">
                                                                 <div class="wt-article  gig-box">
                                                                     <div class="gig-cover-img">
-                                                                                <img src="/images/article/img-05.jpg" alt="img description">
+                                                                                <img src="/default/uploads/gig-cover/<%= gig[i].cover_image %>" alt="img description">
                                                                     </div>
                                                                     <div class="wt-articlecontent gig-content">
                                                                             <div class="wt-title ct-user">
-                                                                                <p><a href="">@Kelvin5019</a></p>
+                                                                                <p>
+                                                                                    <a href="">
+                                                                                        @<%= user[0].firstName %> <%= user[0].lastName %>
+                                                                                    </a><br>
+                                                                                    <% if( gig[i].blocked == '1'){ %>
+                                                                                        <span style="padding-top:8px;font-size:12px;margin-bottom: 0px;color: rgb(1, 209, 105);">
+                                                                                            This Gig is currently active
+                                                                                        </span>
+                                                                                    <% }else{ %>
+                                                                                        <span style="padding-top:8px;font-size:12px;margin-bottom: 0px;color: #ff5851;">
+                                                                                            This Gig is currently Inactive
+                                                                                        </span>
+                                                                                    <% } %>
+                                                                                </p>
+                                                                                
                                                                             </div>
                                                                         <div class="wt-title gig-main-body">
-                                                                            <p>                                    I will animate in white board and 2d in all languages</p>
+                                                                            <p>                                    <%= gig[i].title %>
+                                                                            </p>
                                                                             <p class="gig-rating">
-                                                                                Rating ( 0 )
+                                                                                Rating ( <%= gig[i].reviews %> )
                                                                             </p>
                                                                         </div>
                                                                         <div class="gig-footer">
-                                                                                <a href="/edit-Gig" class="ct-btn">Edit ?</a>
+                                                                                <a href="/edit-Gig/<%= gig[i].unique_id %>" class="ct-btn xt-edit-btn">
+                                                                                    
+                                                                                    <i style="font-size:20px;" class="fa fa-pencil" aria-hidden="true"></i>
+                                                                                    <!-- Edit ? -->
+                                                                                </a>
+                                                                                <a style="float:right;" data-toggle="modal" gig-id="<%= gig[i].unique_id %>"href="#myModullUNBLOCKGIG" class="ct-btn xt-delete-btn">
+                                                                                    <i style="font-size:20px;" class="fa fa-trash" aria-hidden="true"></i>
+                                                                                    <!-- Delete -->
+                                                                                </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div style="float:left;" class="col-sm-6 col-md-3 col-lg-4">
-                                                                <!-- gig-content -->
-                                                                    <div class="wt-article  gig-box">
-                                                                        <div class="gig-cover-img">
-                                                                                    <img src="/images/article/articlessingle/img-04.jpg" alt="img description">
-                                                                        </div>
-                                                                        <div class="wt-articlecontent gig-content">
-                                                                                <div class="wt-title ct-user">
-                                                                                    <p><a href="">@Kelvin5019</a></p>
-                                                                                </div>
-                                                                            <div class="wt-title gig-main-body">
-                                                                                <p>                                    I will animate in white board and 2d in all languages</p>
-                                                                                <p class="gig-rating">
-                                                                                    Rating ( 0 )
-                                                                                </p>
-                                                                            </div>
-                                                                            <footer>
-                                                                                    <div class="gig-footer">
-                                                                                            <a href="/edit-Gig" class="ct-btn">Edit ?</a>
-                                                                                    </div>
-
-                                                                            </footer>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                        <!-- <div style="float:left;" class="col-sm-12 col-md-6 col-lg-6">
-                                                                <div class="wt-article gig-content">
-                                                                    <figure>
-                                                                        <img src="images/article/list/img-04.jpg" alt="img description">
-                                                                    </figure>
-                                                                    <div class="wt-articlecontent gig-content">
-                                                                            <div class="wt-title ct-user">
-                                                                                <p><a href="">@Kelvin5019</a></p>
-                                                                            </div>
-                                                                        <div class="wt-title">
-                                                                            <h2>                                    I will animate in white board and 2d in all languages</h2>
-                                                                        </div><br>
-                                                                            <a href="javascript:void(0);" class="ct-btn">Edit ?</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
+                                                            <% } %>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +143,7 @@
                                 <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
                                     <div class="tg-authorcodescan wt-codescanholder">
                                         <figure class="tg-qrcodeimg">
-                                            <img src="/images/qrcode.png" alt="img description">
+                                            <img src="/default/images/qrcode.png" alt="img description">
                                         </figure>
                                         <div class="tg-qrcodedetail">
                                             <span class="lnr lnr-laptop-phone"></span>
@@ -178,7 +162,7 @@
                                         </div>
                                     </div>
                                     <div class="wt-companyad">
-                                        <figure class="wt-companyadimg"><img src="/images/add-img.jpg" alt="img description"></figure>
+                                        <figure class="wt-companyadimg"><img src="/default/images/add-img.jpg" alt="img description"></figure>
                                         <span>Advertisement  255px X 255px</span>
                                     </div>
                                 </div>
@@ -187,4 +171,24 @@
                     </section>
                     <!--Register Form End-->
                 </main>
+
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullUNBLOCKGIG" class="modal fade">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title"> Delete Gig?</h4>
+                        </div>
+                    <div class="modal-body">
+                    <p>Are you sure you want to Delete this Gig?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="ct-delete-gig-form">
+                            <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+                            <button class="btn btn-success ct-delete-this-gig" >Delete</button>
+                        </form>
+                    </div>
+                       </div>
+                           </div>
+                       </div>
                 <!--Main End-->	

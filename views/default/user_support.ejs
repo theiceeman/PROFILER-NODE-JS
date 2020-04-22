@@ -1,0 +1,176 @@
+
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+            <!-- Content Wrapper Start -->
+            <div class="wt-contentwrapper">
+                <!--Main Start-->
+                <main style="padding:0px 10px 0 10px;margin-bottom: 0%;margin-top: 110px;" id="wt-main" class="wt-main wt-haslayout">
+                    
+                    <!--Sidebar Start-->
+                    <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+                            <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+                                <span class="menu-icon">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </span>
+                            </div>
+                            <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
+                                <div class="wt-companysdetails wt-usersidebar">
+                                    <figure class="wt-companysimg">
+                                        <img src="/default/images/sidebar/img-01.jpg" alt="img description">
+                                    </figure>
+                                    <div class="wt-companysinfo">
+                                            <figure><img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+                                        <div class="wt-title">
+                                            <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
+                                            <span>Amento Tech</span>
+                                        </div>
+                                        <!-- <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div> -->
+                                    </div>
+                                </div>
+                                <nav id="wt-navdashboard" class="wt-navdashboard">
+                                    <ul>
+                                        <li class="wt-active">
+                                                <a href="/my-profile">
+                                                    <i class="ti-briefcase"></i>
+                                                    <span>View Profile</span>
+                                                </a>
+                                            </li>
+                                        <li class="wt-active">
+                                            <a href="/Mynotifications">
+                                                <i class="ti-dashboard"></i>
+                                                <span>My Notifications</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/user">
+                                                <i class="ti-package"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-notificationicon menu-item-has-children">
+                                            <a href="javascript:void(0);">
+                                                <i class="ti-pencil-alt"></i>
+                                                <span>Gigs</span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li><hr><a href="/createGig">Create Gigs</a></li>
+                                                <li><hr><a href="/View-Gigs">Progress On Gigs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/support">
+                                                <i class="ti-layers"></i>
+                                                <span>Help & Support</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/logout">
+                                                <i class="ti-key"></i>
+                                                <span>Logout</span>
+                                            </a>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    <!--Sidebar Start-->
+                    <!--Register Form Start-->
+                    <section class="wt-haslayout wt-dbsectionspace">
+                        <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                    <div class="wt-dashboardbox wt-messagebox ct-support-img-div">
+                                        <span class="wt-featuredtag">
+                                            <img src="/default/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style">
+                                        </span>
+                                        <div class="wt-dashboardboxcontent">
+                                            <div class="wt-userprofile">
+                                                <figure >
+                                                        <img src="/default/images/personal/helpdesk1.jpg" alt="img description">
+                                                </figure>
+                                            </div>
+                                            <div style="border-top: none;margin-top:0px;padding-top:0px;" class="wt-applyfilters">
+                                                <h2 style="color:rgb(165, 21, 21)">Help & Support</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <div class="wt-dashboardbox wt-messages-holder">
+                                    <div class="wt-dashboardboxtitle">
+                                        <h2>@ebubeokorie</h2>
+                                    </div>
+                                    <div class="wt-dashboardboxtitle wt-titlemessages">
+                                        <a href="javascript:void(0);" class="wt-back"><i class="ti-arrow-left"></i></a>
+                                        <div class="wt-userlogedin">
+                                            <figure class="wt-userimg">
+                                                <img src="/default/images/user-img.jpg" alt="image description">
+                                            </figure>
+                                            <div class="wt-username">
+                                                <h3><i class="fa fa-check-circle"></i> Louanne Mattioli</h3>
+                                                <span>Amento Tech</span>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0);" class="wt-viewprofile">View Profile</a>
+                                    </div>
+                                    <div class="wt-dashboardboxcontent wt-dashboardholder wt-offersmessages xt-chatbox-messages xt-user-support">
+                                        <ul>
+                                            
+                                            <li style="width:100%;">
+                                                <div class="wt-chatarea">
+                                                    <div style="padding-top: 15px;" id="xt-chatBoxArea" class="wt-messages wt-verticalscrollbar wt-dashboardscrollbar">
+                                                        
+                                                    </div>
+                                                    <div class="wt-replaybox">
+                                                        <div class="form-group">
+                                                            <textarea id="xt-chat-textarea" class="form-control" name="reply" placeholder="Type message here"></textarea>
+                                                        </div>
+                                                        <div class="wt-iconbox">
+                                                            <a href="javascript:void(0);" class="wt-btnsendmsg xt-user-send-msg">Send</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                    <div class="wt-dashboardbox wt-messagebox">
+                                        <span class="wt-featuredtag"><img src="/default/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <div class="wt-dashboardboxcontent">
+                                            <div class="wt-userprofile">
+                                                <figure>
+                                                        <img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
+                                                    <div class="wt-userdropdown wt-online">
+                                                    </div>
+                                                </figure>
+                                                <div class="wt-title">
+                                                    <h3><i class="fa fa-check-circle"></i> 
+                                                        @<%= user[0].firstName %> <%= user[0].lastName %> </h3>
+                                                    <span>5.0/5 <a class="javascript:void(0);">(860 Feedback)</a> <br>Member since May 30, 2013 <br>68 Proposals Recieved</span>
+                                                    <p style="display: none;" class="user-detail"><%=user[0].email%></p>
+                                                    <p style="display: none;" class="xt-chat-id">
+                                                        <!-- ebube@gmail.com -->
+                                                        <%=supportId %>
+                                                    </p>
+                                                    <p style="display: none;" class="profile-img">
+                                                            <%=user[0].profile_image%></p>
+                                                    <!-- reciever-img -->
+                                                </div>
+                                            </div>
+                                            <div class="wt-applyfilters">
+                                                <span>Lorem ipsum dolor sit amet.<br>consectetur adipisicing elit. Consequatur, in!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </section>
+                    <!--Register Form End-->
+                </main>
+                <!--Main End-->	
+            </div>
+            <!--Content Wrapper End-->
+        <!-- </div> -->
+        <!--Wrapper End-->

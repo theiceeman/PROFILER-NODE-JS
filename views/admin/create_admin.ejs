@@ -1,0 +1,189 @@
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    <div class="container-fluid">
+
+                        <div class="col-md-12">
+                            <div class="card" style="border: solid 1px #787878;">
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-4 offset-3">
+                                            <button class="btn btn-primary" data-toggle="modal"  href="#REGISTER-ADMIN">
+                                                Register an Administrator
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h4 class="card-title">Administrators</h4>
+                                    <div class="table-overflow">
+                                        <table class="table table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th><i style="color:#13CB22" class="ti-user"></i> First Name</th>
+
+                                                    <th><i style="color: #004CFF" class="ti-email"></i> Email</th>
+
+                                                    <th><i style="color: #FF6700" class="ti-agenda"></i> Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var i=0; allAdmins[i]; i++){ %>
+                                                <tr>
+                                                    <td><%= allAdmins[i].firstname %></td>
+                                                    <td><%= allAdmins[i].email %></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a data-toggle="modal" class="btn btn-outline-danger" href="#myModullBLOCK"><i class="ti-lock"></i></a>
+                                                            <a data-toggle="modal" class="btn btn-outline-success" href="#myModullUNBLOCK"><i class="ti-unlock"></i></a>
+                                                            <a data-toggle="modal" class="btn btn-danger" href="#myModullDELL"><i class="c-red-500 ti-trash"></i></a>
+
+                                                        </div> 
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullBLOCK" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title"> Block User?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to Block this User?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+
+                            <button class="btn btn-success" onClick="blockAdmin('.$row['id'].')">Block</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal --> 
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullUNBLOCK" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title"> Unblock User?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to Unblock this User?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+
+                            <button class="btn btn-success" onClick="blockAdmin('.$row['id'].')">Unblock</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModullDELL" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title"> Delete User?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to Delete this User?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-success" type="button">Cancel</button>
+
+                            <button class="btn btn-success" onClick="blockAdmin('.$row['id'].')">Delete</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+            <!-- Modal START-->
+                <div class="modal fade" id="REGISTER-ADMIN">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4>Register an administrator </h4>
+                            </div>
+                            <form action="" id="xt-REGISTER-ADMIN">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="form-1-1" class="col-md-2 control-label">First Name</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="firstName" placeholder="Enter Admin Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="form-1-2" class="col-md-2 control-label">Email</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" name="email" placeholder="Enter Admin Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="form-1-3" class="col-md-2 control-label">Password</label>
+                                    <div class="col-md-10">
+                                        <input type="password" name="password" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="form-1-4" class="col-md-2 control-label">Confirm Password</label>
+                                    <div class="col-md-10">
+                                        <input type="password" name="c_password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer no-border">
+                                <div class="text-right">
+                                    <button class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-primary btn-sm xt-register-admin">Register Admin</button>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- Content Wrapper END -->
+
+            <!-- Footer START -->
+            <footer class="content-footer">
+                <div class="footer">
+                    <div class="copyright">
+                        <span>Copyright © 2017 <b class="text-dark">Theme_Nate</b>. All rights reserved.</span>
+                        <span class="go-right">
+                            <a href="#" class="text-gray mrg-right-15">Term &amp; Conditions</a>
+                            <a href="#" class="text-gray">Privacy &amp; Policy</a>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer END -->

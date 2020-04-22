@@ -1,0 +1,22 @@
+<%- include('../partials/admin/head') %>
+<body>
+    <% if(page !== 'Admin-Login'){ %>
+	<div class="app">
+		<div class="layout">
+
+            <%- include('../partials/admin/sidebar') %>
+			<div class="page-container">
+               
+                
+                <%- include('../partials/admin/header') %>
+    <% } %>
+                
+                <%- body %>
+
+    <% if(page !== 'Admin-Login'){ %>
+			</div>
+
+		</div>
+    </div>
+    <% } %>
+<%- include('../partials/admin/footer') %>

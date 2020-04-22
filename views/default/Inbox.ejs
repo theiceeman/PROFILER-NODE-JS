@@ -1,0 +1,169 @@
+
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!--Main Start-->
+			<main style="padding:0px 10px 0 10px;margin-bottom: 0%;margin-top: 110px;" id="wt-main" class="wt-main wt-haslayout">
+				<!--Register Form Start-->
+				<section class="wt-haslayout wt-dbsectionspace">
+					<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+								<div class="wt-dashboardbox wt-messagebox">
+									<span class="wt-featuredtag"><img src="/default/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+									<div class="wt-dashboardboxcontent">
+										<div class="wt-userprofile">
+											<figure>
+													<img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
+												<div class="wt-userdropdown wt-online">
+												</div>
+											</figure>
+											<div class="wt-title">
+												<h3><i class="fa fa-check-circle"></i>
+													 @<%=user[0].firstName%><%=user[0].lastName%></h3>
+												<span>5.0/5 <a class="javascript:void(0);">(860 Feedback)</a> <br>Member since May 30, 2013 <br>68 Proposals Recieved</span>
+												<p style="display: none;" class="user-detail"><%=user[0].email%></p>
+												<p style="display: none;" class="chat-id"><%=chatId%></p>
+												<p style="display: none;" class="profile-img">
+													<%=user[0].profile_image%>
+												</p>
+											</div>
+										</div>
+										<div class="wt-applyfilters">
+											<span>Lorem ipsum dolor sit amet.<br>consectetur adipisicing elit. Consequatur, in!</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+							<div class="wt-dashboardbox wt-messages-holder">
+								<div class="wt-dashboardboxtitle">
+									<h2>@ebubeokorie</h2>
+								</div>
+								<div class="wt-dashboardboxtitle wt-titlemessages">
+									<a href="javascript:void(0);" class="wt-back"><i class="ti-arrow-left"></i></a>
+									<div class="wt-userlogedin">
+										<figure class="wt-userimg">
+											<img src="/default/images/user-img.jpg" alt="image description">
+										</figure>
+										<div class="wt-username">
+											<h3><i class="fa fa-check-circle"></i> Louanne Mattioli</h3>
+											<span>Amento Tech</span>
+										</div>
+									</div>
+									<a href="javascript:void(0);" class="wt-viewprofile">View Profile</a>
+								</div>
+								<div class="wt-dashboardboxcontent wt-dashboardholder wt-offersmessages ct-chatbox-messages">
+									<ul>
+										
+										<li style="width:100%;">
+											<div class="wt-chatarea">
+												<div style="padding-top: 15px;" id="ct-chatBoxArea" class="wt-messages wt-verticalscrollbar wt-dashboardscrollbar">
+													<!-- <div class="wt-offerermessage">
+														<figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+														<div class="wt-description">
+															<p>Consectetur adipisicing elit sei do eiusmod tempor incididunt labore et dolore.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">January 12th, 2011</time>
+														</div>
+													</div>
+													<div class="wt-memessage wt-readmessage">
+														<figure><img src="/uploads/profile-images/<%= seller[0].profile_image %> " alt="img description"></figure>
+														<div class="wt-description">
+															<p>Eiusmod tempor incididunt labore et dolore magna aliqiu enim ad minim veniam qiuisru exercitation ullamco laborisen nisi ut aliquip exea.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">Jun 28, 2017 09:30</time>
+															<div class="clearfix"></div>
+														</div>
+													</div>
+													<div class="wt-offerermessage">
+														<figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+														<div class="wt-description">
+															<p>Consectetur adipisicing elit sei do eiusmod tempor incididunt labore et dolore.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">January 12th, 2011</time>
+														</div>
+													</div>
+													<div class="wt-memessage wt-readmessage">
+														<figure><img src="/uploads/profile-images/<%= seller[0].profile_image %> " alt="img description"></figure>
+														<div class="wt-description">
+															<p>Eiusmod tempor incididunt labore et dolore magna aliqiu enim ad minim veniam qiuisru exercitation ullamco laborisen nisi ut aliquip exea.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">Jun 28, 2017 09:30</time>
+															<div class="clearfix"></div>
+														</div>
+													</div> -->
+													<!-- <div class="wt-offerermessage">
+														<figure>
+															<img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description">
+														</figure>
+														<div class="wt-description">
+															<p>Consectetur adipisicing elit sei do eiusmod tempor incididunt labore et dolore.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">January 12th, 2011</time>
+														</div>
+													</div>
+													<div class="wt-memessage wt-readmessage">
+														<figure>
+															<img src="/uploads/profile-images/<%= seller[0].profile_image %> " alt="img description">
+														</figure>
+														<div class="wt-description">
+															<p>Eiusmod tempor incididunt labore et dolore magna aliqiu enim ad minim veniam qiuisru exercitation ullamco laborisen nisi ut aliquip exea.</p>
+															<div class="clearfix"></div>
+															<time datetime="2017-08-08">Jun 28, 2017 09:30</time>
+															<div class="clearfix"></div>
+														</div>
+													</div> -->
+													
+												</div>
+												<div class="wt-replaybox">
+													<div class="form-group">
+														<textarea id="ct-chat-textarea" class="form-control" name="reply" placeholder="Type message here"></textarea>
+													</div>
+													<div class="wt-iconbox">
+														<!-- <i class="lnr lnr-thumbs-up"></i>
+														<i class="lnr lnr-thumbs-down"></i>
+														<i class="lnr lnr-smile"></i> -->
+														<a href="javascript:void(0);" class="wt-btnsendmsg ct-user-send-msg">Send</a>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+								<div class="wt-dashboardbox wt-messagebox">
+									<span class="wt-featuredtag"><img src="/default/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+									<div class="wt-dashboardboxcontent">
+										<div class="wt-userprofile">
+											<figure>
+													<img src="/default/uploads/profile-images/<%= seller[0].profile_image %> " alt="img description">
+												<div class="wt-userdropdown wt-online">
+												</div>
+											</figure>
+											<div class="wt-title">
+												<h3><i class="fa fa-check-circle"></i> 
+													@<%= seller[0].firstName%><%= seller[0].lastName%></h3>
+												<span>5.0/5 <a class="javascript:void(0);">(860 Feedback)</a> <br>Member since May 30, 2013 <br>68 Proposals Recieved</span>
+												<p style="display: none;" class="seller-detail"><%=seller[0].email%></p>
+												<p style="display: none;" class="reciever-img"><%=seller[0].profile_image%></p>
+												<!-- reciever-img -->
+											</div>
+										</div>
+										<div class="wt-applyfilters">
+											<span>Lorem ipsum dolor sit amet.<br>consectetur adipisicing elit. Consequatur, in!</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</section>
+				<!--Register Form End-->
+			</main>
+			<!--Main End-->	
+		</div>
+		<!--Content Wrapper End-->
+	<!-- </div> -->
+	<!--Wrapper End-->

@@ -1,0 +1,276 @@
+
+	<!-- Wrapper Start -->
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+		<!-- Content Wrapper Start -->
+		<div class="wt-contentwrapper">
+			<!--Inner Home End-->
+			<!--Main Start-->
+			<main id="" style="padding: 20px 50px;margin-bottom: 0%;margin-top: 100px;" class="wt-main wt-haslayout wt-innerbgcolor">
+				<div style="margin-right: 0%; margin-left: 0%;" class="wt-haslayout wt-main-section">
+					<!-- User Listing Start-->
+					<div style="margin-right: 0%; margin-left: 0%;max-width: 2140px;" class="container">
+						<div class="row">
+							<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+									<div class="wt-proposalholder">
+										<span class="wt-featuredtag"><img src="/default/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+										<div class="wt-proposalhead">
+											<h2><%= gig[0].title %></h2>
+											<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+												<li>
+													<span>
+														<img src="/default/images/flag/img-02.png" alt="img description">  Nigeria
+													</span>
+												</li>
+												<li><span><i class="far fa-folder"></i> 
+													State: <%=gigOwner[0].state%></span>
+												</li>
+												<li><span><i class="far fa-folder"></i> 
+													Reviews: [ <%=gig[0].reviews%> ]
+													</span>
+												</li>
+												<li><span><i class="far fa-clock"></i> Member Since: May 2018</span></li>
+											</ul>
+										</div>
+										<div id="ct-contact-seller"  class="wt-btnarea ct-contact-seller">
+											<a id="/inbox/<%=gig[0].email%>" class="ct-inbox-path" href=""></a>
+											<button id="<% if(userId){%>true<%} %>" class="wt-btn">Contact Seller</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+										<div class="wt-widget wt-companysinfo-jobsingle">
+												<div class="wt-companysdetails">
+													<figure class="wt-companysimg">
+														<img src="/default/images/article/classic/img-03.jpg" alt="img description">
+													</figure>
+													<div class="wt-companysinfo">
+														<div class="ct-profile-img">
+																<img src="/default/uploads/profile-images/<%= gigOwner[0].profile_image %> " alt="img description">
+														</div>
+														<div class="wt-title">
+															
+																<h2><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> 
+																	@<%=gigOwner[0].firstName%> <%=gigOwner[0].lastName%></h2>
+															</a>
+															<p style="font-size: 16px;line-height: 26px;margin-top:-15px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae, tempore.</p>
+														</div>
+														<ul class="wt-postarticlemeta">
+															<li>
+																<button class="ct-contact-seller">
+																	<span>Contact Me</span>
+																</button>
+															</li>
+															<li>
+																<a href="javascript:void(0);">
+																	<span>Full Profile</span>
+																</a>
+															</li>
+															<!-- <li class="wt-following">
+																<a href="javascript:void(0);">
+																	<span>Contact Me</span>
+																</a>
+															</li> -->
+														</ul>
+													</div>
+												</div>
+											</div>
+									<div class="wt-projectdetail-holder">
+										<div class="wt-skillsrequired">
+											<div class="wt-title">
+												<h3>Other Skills By This Seller </h3>
+											</div>
+											<div class="wt-tag wt-widgettag">
+												<a href="javascript:void(0);">PHP Developer</a>
+												<a href="javascript:void(0);">PHP</a>
+												<a href="javascript:void(0);">My SQL</a>
+												<a href="javascript:void(0);">Business</a>
+												<a href="javascript:void(0);">Website Development</a>
+												<a href="javascript:void(0);">Collaboration</a>
+												<a href="javascript:void(0);">Decent</a>
+											</div>
+										</div>
+										<div class="wt-attachments">
+											<div class="wt-title">
+												<h3>Reviews</h3>
+											</div>
+											<ul class="wt-attachfile">
+												<li class="ct-review">
+													<span><h5>@ebubeokorie</h5></span>
+													<p class="ct-review-body">Great thanks again dear</p>
+													<p style="color: #95979d;font-size:16px;">Published 3 days ago</p>
+													
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+									<aside id="wt-sidebar" class="wt-sidebar">
+										<div class="wt-proposalsr">
+											<div class="wt-proposalsrcontent">
+												<span class="wt-proposalsicon"><i class="fa fa-angle-double-down"></i><i class="fa fa-newspaper"></i></span>
+												<div class="wt-title">
+													<h3>62</h3>
+													<span>Proposals Received Till<em>February 01, 2020</em></span>
+													<% if(user){ %>
+													<p style="display:none" class="ct-compare-onlineUserEmail"><%=user[0].email%></p>
+													<p style="display:none" class="ct-compare-gigOwnerEmail"><%=gigOwner[0].email%></p>
+													<% } %>
+												</div>
+											</div>
+											<div class="wt-clicksavearea ct-contact-seller">
+												<a href="" class="wt-clicksavebtn">
+													Make a Proposal</a>
+											</div>
+										</div>
+										<!-- <div class="wt-widget wt-companysinfo-jobsingle">
+											<div class="wt-companysdetails">
+												<figure class="wt-companysimg">
+													<img src="images/company/img-01.jpg" alt="img description">
+												</figure>
+												<div class="wt-companysinfo">
+													<figure><img src="images/company/img-01.png" alt="img description"></figure>
+													<div class="wt-title">
+														<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+														<h2>Angry Creative Studio</h2>
+													</div>
+													<ul class="wt-postarticlemeta">
+														<li>
+															<a href="javascript:void(0);">
+																<span>Open Jobs</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0);">
+																<span>Full Profile</span>
+															</a>
+														</li>
+														<li class="wt-following">
+															<a href="javascript:void(0);">
+																<span>Following</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div> -->
+										<div style="width:70%;margin-left: 15%;" class="wt-widget wt-sharejob">
+											<!-- <div class="wt-widgettitle">
+												<h2>Share This Job</h2>
+											</div> -->
+											<div class="tg-authorcodescan">
+												<figure class="tg-qrcodeimg">
+													<img src="/default/images/qrcode.png" alt="img description">
+												</figure>
+												<div class="tg-qrcodedetail">
+													<span class="lnr lnr-laptop-phone"></span>
+													<div class="tg-qrcodefeat">
+														<h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+													</div>
+												</div>
+											</div>
+										</div>
+										<% if(userId && user[0].email !== gigOwner[0].email){ %>
+										<div class="wt-widget wt-reportjob">
+											<div class="wt-widgettitle">
+												<h2>Review this seller</h2>
+											</div>
+											<div class="wt-widgetcontent">
+												<form class="wt-formtheme wt-formreport">
+													<fieldset>
+														<div class="form-group">
+															<textarea id="ct-review-seller-text" class="form-control" placeholder="How do you rate this seller..."></textarea>
+														</div>
+														<div class="form-group wt-btnarea">
+															<a href="javascrip:void(0);" class="wt-btn ct-review-this-seller">Review</a>
+														</div>
+													</fieldset>
+												</form>
+											</div>
+										</div>
+										<% } %>
+									</aside>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- User Listing End-->
+				</div>
+			</main>
+			<!--Main End-->
+			<!--Footer Start-->
+			<footer id="wt-footer" class="wt-footer wt-haslayout">
+				<div class="wt-footerholder wt-haslayout">
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+								<div class="wt-footerlogohold">
+									<strong class="wt-logo">
+										<a href="/profiler-home-page">
+											<img src="/default/images/profiler-logo-footer.png" alt="company logo here">
+										</a>
+									</strong>
+									<div class="wt-description">
+										<p>Profiler is a virtual marketplace where business needs meet the professional solutions that can solve them. We provide a free platform for growing your customer base as a freelancer or a professional  <a href="/about-us-page">more...</a></p>
+									</div>
+									<ul class="wt-socialiconssimple wt-socialiconfooter">
+										<li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+										<li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
+										<li class="wt-youtube"><a href="javascript:void(0);"><i class="fab fa-youtube"></i></a></li>
+										<li class="wt-instagram"><a href="javascript:void(0);"><i class="fab fa-instagram"></i></a></li>
+										<li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="wt-footercol wt-widgetcompany">
+									<div class="wt-fwidgettitle">
+										<h3>Company</h3>
+									</div>
+									<ul class="wt-fwidgetcontent">
+										<li><a href="/about-us-page">About Us</a></li>
+										<li><a href="/how-it-works-page">How It Works</a></li>
+										<li><a href="/javascript:void(0);">Careers</a></li>
+										<li><a href="/terms-condition-page">Terms &amp; Conditions</a></li>
+										<li><a href="javascript:void(0);">Trust &amp; Safety</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="wt-widgetskills">
+									<div class="wt-fwidgettitle">
+										<h3>By Skills</h3>
+									</div>
+									<ul class="wt-fwidgetcontent">
+										<li><a href="main-category-page">Artisan</a></li>
+										<li><a href="main-category-page">Programming &amp; Tech</a></li>
+										<li><a href="main-category-page">Lifestyle</a></li>
+										<li><a href="main-category-page">Graphic & Design</a></li>
+										<li><a href="main-category-page">Fashion</a></li>
+										<li><a href="main-category-page">Digital Marketing</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="wt-haslayout wt-joininfo">
+					<div class="container">
+						<div class="row justify-content-md-center">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 push-lg-1">
+								<div class="wt-companyinfo">
+									<span><a href="/register-page">New @ Profiler?</a> kindly register as a seller/user to enjoy the full benefit of being a Profiler!.</span>
+								</div>
+								<div class="wt-fbtnarea">
+									<a href="/register-page" class="wt-btn">Join Now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--Footer End-->
+		</div>
+		<!--Content Wrapper End-->
+	</div>

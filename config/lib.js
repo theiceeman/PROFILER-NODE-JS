@@ -55,6 +55,50 @@ const lib = {
         
       
       },
+      createDate:() => {
+        let date_obj = new Date();
+        let current_date = date_obj.toUTCString();
+        let date_arr = current_date.split(" ");
+        let timearr = date_arr[4].split(":");
+        if(Number(timearr[0]) > 12){
+            let meridian = 'pm';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }else{
+            let meridian = 'am';
+            let the_date = date_arr[0]+' '+date_arr[1]+' '+date_arr[2]+' '+date_arr[3]+' '+date_arr[4]+' '+meridian;
+            return the_date;
+        }
+
+      },
+      selectQuery:(query,option,values)=>{
+          if(option == 'with_params'){
+            return new Promise((resolve,reject)=>{
+
+                mySqlQuery.query(query, values,(err,result, rows) => {
+                            if (err) {
+                                reject(err);    
+                            } else {
+                                resolve(result);
+                            }
+                })
+
+            })
+        }else if(option == 'all_rows'){
+            return new Promise((resolve,reject)=>{
+                mySqlQuery.query(query, (err,result, rows) => {
+                            if (err) {
+                                reject(err);    
+                            } else {
+                                resolve(result);
+                            }
+                })
+
+            })
+
+        }
+
+      },
 
     
 

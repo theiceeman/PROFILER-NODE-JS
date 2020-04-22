@@ -7,6 +7,7 @@
                 <!--Header End-->
                 <!--Main Start-->
                 <main id="wt-main" class="wt-main wt-haslayout custom-main">
+                    
                         <!--Sidebar Start-->
                         <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
                                 <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
@@ -19,10 +20,10 @@
                                 <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
                                     <div class="wt-companysdetails wt-usersidebar">
                                         <figure class="wt-companysimg">
-                                            <img src="/images/sidebar/img-01.jpg" alt="img description">
+                                            <img src="/default/images/sidebar/img-01.jpg" alt="img description">
                                         </figure>
                                         <div class="wt-companysinfo">
-                                                <figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+                                                <figure><img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
                                             <div class="wt-title">
                                                 <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
                                                 <span>Amento Tech</span>
@@ -61,13 +62,13 @@
                                                 </ul>
                                             </li>
                                             <li class="wt-active">
-                                                <a href="dashboard-profile.html">
+                                                <a href="/user_support">
                                                     <i class="ti-layers"></i>
                                                     <span>Help & Support</span>
                                                 </a>
                                             </li>
                                             <li class="wt-active">
-                                                <a href="dashboard-profile.html">
+                                                <a href="/logout">
                                                     <i class="ti-key"></i>
                                                     <span>Logout</span>
                                                 </a>
@@ -90,12 +91,6 @@
                                                     <ul class="wt-tabstitle nav navbar-nav">
                                                         <li class="nav-item">
                                                             <a class="active" data-toggle="tab" href="#wt-skills">Overview</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a data-toggle="tab" href="#wt-awards">
-                                                                Gig Cover Image
-
-                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -126,12 +121,9 @@
                                                                             <span class="wt-select">
                                                                                 <select id="ct-gig-maincategory">
                                                                                     <option value="" >Select Main Category</option>
-                                                                                    <option value="6879888">Artisans</option>
-                                                                                    <option value="Programming & Tech">Programming & Tech</option>
-                                                                                    <option value="Fashion">Fashion</option>
-                                                                                    <option value="Digital Marketing">Digital Marketing</option>
-                                                                                    <option value="Graphic Design">Graphic Design</option>
-                                                                                    <option value="Lifestyle">Lifestyle</option>
+                                                                                    <% for(var i=0; mainCat[i]; i++){ %>
+                                                                                        <option value="<%= mainCat[i].unique_id %>"><%= mainCat[i].title %></option>
+                                                                                    <% } %>
                                                                                 </select>
                                                                             </span>
                                                                         </div>
@@ -139,8 +131,6 @@
                                                                             <span class="wt-select">
                                                                                 <select id="ct-gig-subcategory">
                                                                                     <option value="" >Select a Sub Category</option>
-                                                                                    <option id="rem" value="">Male</option>
-                                                                                    <option id="rem" value="">Female</option>
                                                                                 </select>
                                                                             </span>
                                                                         </div>
@@ -191,7 +181,7 @@
                                 <div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
                                     <div class="tg-authorcodescan wt-codescanholder">
                                         <figure class="tg-qrcodeimg">
-                                            <img src="/images/qrcode.png" alt="img description">
+                                            <img src="/default/images/qrcode.png" alt="img description">
                                         </figure>
                                         <div class="tg-qrcodedetail">
                                             <span class="lnr lnr-laptop-phone"></span>
@@ -210,7 +200,7 @@
                                         </div>
                                     </div>
                                     <div class="wt-companyad">
-                                        <figure class="wt-companyadimg"><img src="/images/add-img.jpg" alt="img description"></figure>
+                                        <figure class="wt-companyadimg"><img src="/default/images/add-img.jpg" alt="img description"></figure>
                                         <span>Advertisement  255px X 255px</span>
                                     </div>
                                 </div>

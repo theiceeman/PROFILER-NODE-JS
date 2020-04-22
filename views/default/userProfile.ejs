@@ -8,75 +8,76 @@
 			<!--Header End-->
 			<!--Main Start-->
 			<main id="wt-main" class="wt-main wt-haslayout custom-main">
-				<!--Sidebar Start-->
-				<div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
-						<div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
-							<span class="menu-icon">
-								<em></em>
-								<em></em>
-								<em></em>
-							</span>
-						</div>
-						<div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
-							<div class="wt-companysdetails wt-usersidebar">
-								<figure class="wt-companysimg">
-									<img src="/images/sidebar/img-01.jpg" alt="img description">
-								</figure>
-								<div class="wt-companysinfo">
-										<figure><img src="/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
-									<div class="wt-title">
-										<h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
-										<span>Amento Tech</span>
-									</div>
-									<!-- <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div> -->
-								</div>
-							</div>
-							<nav id="wt-navdashboard" class="wt-navdashboard">
-								<ul>
-									<li class="wt-active">
-											<a href="/my-profile">
-												<i class="ti-briefcase"></i>
-												<span>View Profile</span>
-											</a>
-										</li>
-									<li class="wt-active">
-										<a href="/Mynotifications">
-											<i class="ti-dashboard"></i>
-											<span>My Notifications</span>
-										</a>
-									</li>
-									<li class="wt-active">
-										<a href="/user">
-											<i class="ti-package"></i>
-											<span>Dashboard</span>
-										</a>
-									</li>
-									<li class="wt-notificationicon menu-item-has-children">
-										<a href="javascript:void(0);">
-											<i class="ti-pencil-alt"></i>
-											<span>Gigs</span>
-										</a>
-										<ul class="sub-menu">
-											<li><hr><a href="/createGig">Create Gigs</a></li>
-											<li><hr><a href="/View-Gigs">Progress On Gigs</a></li>
-										</ul>
-									</li>
-									<li class="wt-active">
-										<a href="dashboard-profile.html">
-											<i class="ti-layers"></i>
-											<span>Help & Support</span>
-										</a>
-									</li>
-									<li class="wt-active">
-										<a href="/logout">
-											<i class="ti-key"></i>
-											<span>Logout</span>
-										</a>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				<!--Sidebar Start-->
+                    
+                    <!--Sidebar Start-->
+                    <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+                            <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+                                <span class="menu-icon">
+                                    <em></em>
+                                    <em></em>
+                                    <em></em>
+                                </span>
+                            </div>
+                            <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
+                                <div class="wt-companysdetails wt-usersidebar">
+                                    <figure class="wt-companysimg">
+                                        <img src="/default/images/sidebar/img-01.jpg" alt="img description">
+                                    </figure>
+                                    <div class="wt-companysinfo">
+                                            <figure><img src="/default/uploads/profile-images/<%= user[0].profile_image %> " alt="img description"></figure>
+                                        <div class="wt-title">
+                                            <h2><a href="javascript:void(0);"> <%= user[0].firstName %> <%= user[0].lastName %></a></h2>
+                                            <span>Amento Tech</span>
+                                        </div>
+                                        <!-- <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div> -->
+                                    </div>
+                                </div>
+                                <nav id="wt-navdashboard" class="wt-navdashboard">
+                                    <ul>
+                                        <li class="wt-active">
+                                                <a href="/my-profile">
+                                                    <i class="ti-briefcase"></i>
+                                                    <span>View Profile</span>
+                                                </a>
+                                            </li>
+                                        <li class="wt-active">
+                                            <a href="/Mynotifications">
+                                                <i class="ti-dashboard"></i>
+                                                <span>My Notifications</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/user">
+                                                <i class="ti-package"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-notificationicon menu-item-has-children">
+                                            <a href="javascript:void(0);">
+                                                <i class="ti-pencil-alt"></i>
+                                                <span>Gigs</span>
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li><hr><a href="/createGig">Create Gigs</a></li>
+                                                <li><hr><a href="/View-Gigs">Progress On Gigs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/user_support">
+                                                <i class="ti-layers"></i>
+                                                <span>Help & Support</span>
+                                            </a>
+                                        </li>
+                                        <li class="wt-active">
+                                            <a href="/logout">
+                                                <i class="ti-key"></i>
+                                                <span>Logout</span>
+                                            </a>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    <!--Sidebar Start-->
 				<!--Register Form Start-->
 				<section style="margin-top:-80px;" class="wt-haslayout">
 					<div class="row">
@@ -86,7 +87,7 @@
                                             <div class="wt-widgetcontent">
                                                     <div class="profile-img">
                                                         <!-- <figure> -->
-                                                            <img src="/uploads/profile-images/<%= user[0].profile_image %>" alt="image description" class="img description">
+                                                            <img src="/default/uploads/profile-images/<%= user[0].profile_image %>" alt="image description" class="img description">
                                                     <!-- </figure> -->
                                                     </div>
                                                 <div class="profile-body">
@@ -310,7 +311,7 @@
 													<li>
 														<div class="wt-accordioninnertitle">
 															<div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitleaone">
-																<figure><img src="/images/thumbnail/img-11.jpg" alt="img description"></figure>
+																<figure><img src="/default/images/thumbnail/img-11.jpg" alt="img description"></figure>
 																<h3>Project Title Here<span>www.themeforest.net</span></h3>
 															</div>
 															<div class="wt-rightarea">
@@ -337,7 +338,7 @@
 													<li>
 														<div class="wt-accordioninnertitle">
 															<div class="wt-projecttitle collapsed" data-toggle="collapse" data-target="#innertitleatwo">
-																<figure><img src="/images/thumbnail/img-11.jpg" alt="img description"></figure>
+																<figure><img src="/default/images/thumbnail/img-11.jpg" alt="img description"></figure>
 																<h3>Project Title Here<span>www.themeforest.net</span></h3>
 															</div>
 															<div class="wt-rightarea">
@@ -380,12 +381,14 @@
 																<%= error %>
 															<% }else{} %></h4> -->
 														<div class="wt-profilephotocontent">
-															<form method="POST" action="/upload-profile-image" class="wt-formtheme wt-formprojectinfo wt-formcategory" enctype="multipart/form-data">
+															<form method="POST" 
+															action="/upload-profile-image" class="wt-formtheme wt-formprojectinfo wt-formcategory" enctype="multipart/form-data">
 																<fieldset>
 																	<div class="form-group form-group-label">
 																		<div class="wt-labelgroup">
 																			<label for="filep">
 																				<span class="wt-btn">Select Files</span>
+                                                                                <input type="text" name="gig_id" value="<%= user[0].firstName %>">
 																				<% if(error){  %>
 																				<input type="hidden" id="file-upload-error" 
 																				value="<%=error%>" >

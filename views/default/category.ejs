@@ -20,7 +20,7 @@
                 </div>
             </div>
             <!--More Details Start-->
-            <section class="wt-haslayout wt-dbsectionspace wt-padding-add-top wt-moredetailsholder">
+            <section style="margin-top: 30px;" class="wt-haslayout wt-dbsectionspace wt-padding-add-top wt-moredetailsholder">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-2 col-xl-3 col-lg-2 handler">
                         <aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
@@ -41,31 +41,31 @@
                                                     <div id="mCSB_2_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
 																<span class="wt-checkbox">
 																	<input id="wt-description" type="checkbox" name="description" value="company" checked="">
-																	<label for="wt-description"> <img src="/images/flag/img-01.png" alt="img description" class="mCS_img_loaded"> Australia</label>
+																	<label for="wt-description"> <img src="/default//images/flag/img-01.png" alt="img description" class="mCS_img_loaded"> Australia</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="us" type="checkbox" name="description" value="company">
-																	<label for="us"> <img src="/images/flag/img-02.png" alt="img description" class="mCS_img_loaded"> United States</label>
+																	<label for="us"> <img src="/default//images/flag/img-02.png" alt="img description" class="mCS_img_loaded"> United States</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="canada" type="checkbox" name="description" value="company">
-																	<label for="canada"> <img src="/images/flag/img-03.png" alt="img description" class="mCS_img_loaded"> Canada</label>
+																	<label for="canada"> <img src="/default//images/flag/img-03.png" alt="img description" class="mCS_img_loaded"> Canada</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="england" type="checkbox" name="description" value="company">
-																	<label for="england"> <img src="images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</label>
+																	<label for="england"> <img src="/default/images/flag/img-04.png" alt="img description" class="mCS_img_loaded"> England</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="emirates" type="checkbox" name="description" value="company">
-																	<label for="emirates"> <img src="images/flag/img-05.png" alt="img description" class="mCS_img_loaded"> United Emirates</label>
+																	<label for="emirates"> <img src="/default/images/flag/img-05.png" alt="img description" class="mCS_img_loaded"> United Emirates</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="wt-description1" type="checkbox" name="description" value="company">
-																	<label for="wt-description1"> <img src="images/flag/img-01.png" alt="img description" class="mCS_img_loaded"> Australia</label>
+																	<label for="wt-description1"> <img src="/default/images/flag/img-01.png" alt="img description" class="mCS_img_loaded"> Australia</label>
 																</span>
                                                         <span class="wt-checkbox">
 																	<input id="us1" type="checkbox" name="description" value="company">
-																	<label for="us1"> <img src="images/flag/img-02.png" alt="img description" class="mCS_img_loaded"> United States</label>
+																	<label for="us1"> <img src="/default/images/flag/img-02.png" alt="img description" class="mCS_img_loaded"> United States</label>
 																</span>
                                                     </div>
                                                     <div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;">
@@ -125,180 +125,45 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-10 col-xl-9 col-lg-10">
+                    <div style="margin-top: 20px;" class="col-12 col-sm-12 col-md-10 col-xl-9 col-lg-10">
                         <div class="row">
-                            <div class="profiler-holder-layout">
-                                <div class="profiler-cards profiler-card">
-                                    <div>
-                                        <div class=" img-holder">
-                                            <img src="images/404-img.jpg" alt="profiler-category" class="img-responsive">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="user-profile-holder">
-                                            <div class="inner-wrapper">
-                                                <span class="seller-image">
-                                                    <div class="profiler-seller-image">
-                                                        <div class="letter">m</div>
-                                                       <span class="fit-avatar-image">
-                                                            <img src="/images/apple-touch-icon.png">
-                                                       </span>
+                                <!-- <div style="float:left;" class="col-sm-6 col-md-3 col-lg-4 "> -->
+                                        <% for(var i=0; gig[i]; i++){ %>
+                                        <div class="wt-article  gig-box">
+                                            <div class="gig-cover-img">
+                                                <a href="/job-profile/<%=gig[i].unique_id %>">
+                                                        <img src="/default/uploads/gig-cover/<%= gig[i].cover_image %>" alt="img description">
+
+                                                </a>
+                                            </div>
+                                            <div class="wt-articlecontent gig-content">
+                                                    <div class="wt-title ct-user">
+                                                        <p><a href="">
+                                                                @<%=gigOwner[i] %>
+                                                        </a></p>
                                                     </div>
-                                                </span>
-                                                <span class="seller-name">
-                                                    <a href="freelancer-gigs" target="_self" rel="nofollow">Sunex</a>
-                                                </span>
+                                                <div class="wt-title gig-main-body">
+                                                    <p>
+                                                        <a href="/job-profile/<%=gig[i].unique_id %>">
+                                                            <%= gig[i].title %>
+
+                                                        </a>
+                                                    </p>
+                                                    <p class="gig-rating">
+                                                        Rating ( <%=gig[i].reviews %> )
+                                                    </p>
+                                                </div>
+                                                <div class="gig-footer">
+                                                        <h5>
+                                                            Profiler Verified!
+                                                        </h5>
+                                                </div>
                                             </div>
                                         </div>
-                                        <h3 class="profiler-card-content">
-                                            <a href="freelancer-gigs" target="_blank">
-                                                i will develop any kind of website for you
-                                            </a>
-                                        </h3>
-                                        <div class="profiler-review-area">reviews (48)</div>
-                                    </div>
-                                    <footer>
-                                        <div class="gig-fav">
-                                            <a class="icn-heart hint--top js-open-popup-join" href="#!" data-hint="Add to Saved">
-                                                <i class="ficon ficon-favorite"></i>
-                                            </a>
-                                        </div>
-                                        <a href="#" target="_blank" class="price" title="500NGN">
-                                            <small class="text-body-3">Starting at</small>
-                                            500NGN
-                                        </a>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="profiler-holder-layout">
-                                <div class="profiler-cards profiler-card">
-                                    <div>
-                                        <div class=" img-holder">
-                                            <img src="images/404-img.jpg" alt="profiler-category" class="img-responsive">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="user-profile-holder">
-                                            <div class="inner-wrapper">
-                                                <span class="seller-image">
-                                                    <div class="profiler-seller-image">
-                                                        <div class="letter">m</div>
-                                                       <span class="fit-avatar-image">
-                                                            <img src="/images/apple-touch-icon.png">
-                                                       </span>
-                                                    </div>
-                                                </span>
-                                                <span class="seller-name">
-                                                    <a href="freelancer-gigs" target="_self" rel="nofollow">Sunex</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h3 class="profiler-card-content">
-                                            <a href="freelancer-gigs" target="_blank">
-                                                i will develop any kind of website for you
-                                            </a>
-                                        </h3>
-                                        <div class="profiler-review-area">reviews (48)</div>
-                                    </div>
-                                    <footer>
-                                        <div class="gig-fav">
-                                            <a class="icn-heart hint--top js-open-popup-join" href="#!" data-hint="Add to Saved">
-                                                <i class="ficon ficon-favorite"></i>
-                                            </a>
-                                        </div>
-                                        <a href="#" target="_blank" class="price" title="500NGN">
-                                            <small class="text-body-3">Starting at</small>
-                                            500NGN
-                                        </a>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="profiler-holder-layout">
-                                <div class="profiler-cards profiler-card">
-                                    <div>
-                                        <div class=" img-holder">
-                                            <img src="images/404-img.jpg" alt="profiler-category" class="img-responsive">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="user-profile-holder">
-                                            <div class="inner-wrapper">
-                                                <span class="seller-image">
-                                                    <div class="profiler-seller-image">
-                                                        <div class="letter">m</div>
-                                                       <span class="fit-avatar-image">
-                                                            <img src="/images/apple-touch-icon.png">
-                                                       </span>
-                                                    </div>
-                                                </span>
-                                                <span class="seller-name">
-                                                    <a href="freelancer-gigs" target="_self" rel="nofollow">Sunex</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h3 class="profiler-card-content">
-                                            <a href="freelancer-gigs" target="_blank">
-                                                i will develop any kind of website for you
-                                            </a>
-                                        </h3>
-                                        <div class="profiler-review-area">reviews (48)</div>
-                                    </div>
-                                    <footer>
-                                        <div class="gig-fav">
-                                            <a class="icn-heart hint--top js-open-popup-join" href="#!" data-hint="Add to Saved">
-                                                <i class="ficon ficon-favorite"></i>
-                                            </a>
-                                        </div>
-                                        <a href="#" target="_blank" class="price" title="500NGN">
-                                            <small class="text-body-3">Starting at</small>
-                                            500NGN
-                                        </a>
-                                    </footer>
-                                </div>
-                            </div>
-                            <div class="profiler-holder-layout">
-                                <div class="profiler-cards profiler-card">
-                                    <div>
-                                        <div class=" img-holder">
-                                            <img src="/images/404-img.jpg" alt="profiler-category" class="img-responsive">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="user-profile-holder">
-                                            <div class="inner-wrapper">
-                                                <span class="seller-image">
-                                                    <div class="profiler-seller-image">
-                                                        <div class="letter">m</div>
-                                                       <span class="fit-avatar-image">
-                                                            <img src="/images/apple-touch-icon.png">
-                                                       </span>
-                                                    </div>
-                                                </span>
-                                                <span class="seller-name">
-                                                    <a href="freelancer-gigs" target="_self" rel="nofollow">Sunex</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h3 class="profiler-card-content">
-                                            <a href="freelancer-gigs" target="_blank">
-                                                i will develop any kind of website for you
-                                            </a>
-                                        </h3>
-                                        <div class="profiler-review-area">reviews (48)</div>
-                                    </div>
-                                    <footer>
-                                        <div class="gig-fav">
-                                            <a class="icn-heart hint--top js-open-popup-join" href="#!" data-hint="Add to Saved">
-                                                <i class="ficon ficon-favorite"></i>
-                                            </a>
-                                        </div>
-                                        <a href="#" target="_blank" class="price" title="500NGN">
-                                            <small class="text-body-3">Starting at</small>
-                                            500NGN
-                                        </a>
-                                    </footer>
-                                </div>
-                            </div>
+                                        <% } %>
+                                    <!-- </div> -->
+                                    
+                           
                         </div>
                     </div>
                 </div>
@@ -313,7 +178,7 @@
                     <div class="wt-footerlogohold">
                         <strong class="wt-logo">
                             <a href="profiler-home-page">
-                                <img src="images/profiler-logo-footer.png" alt="company logo here">
+                                <img src="/default/images/profiler-logo-footer.png" alt="company logo here">
                             </a>
                         </strong>
                         <div class="wt-description">
